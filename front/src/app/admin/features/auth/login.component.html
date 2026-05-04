@@ -1,0 +1,26 @@
+<div class="login-shell">
+      <div class="login-card">
+        <div class="login-logo">🎓</div>
+        <h1 class="login-title">LMS Admin</h1>
+        <p class="login-sub">Sign in to your dashboard</p>
+
+        <form [formGroup]="form" (ngSubmit)="submit()" class="login-form">
+          <div class="field">
+            <label>Email</label>
+            <input formControlName="email" type="email" placeholder="admin@example.com" />
+          </div>
+
+          <div class="field">
+            <label>Password</label>
+            <input formControlName="password" type="password" placeholder="••••••••" />
+          </div>
+
+          <div class="error-msg" *ngIf="error">{{ error }}</div>
+
+          <button type="submit" class="login-btn" [disabled]="form.invalid || loading">
+            {{ loading ? 'Signing in...' : 'Sign In' }}
+          </button>
+        </form>
+
+      </div>
+    </div>

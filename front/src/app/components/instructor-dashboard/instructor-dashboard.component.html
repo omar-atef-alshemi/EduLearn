@@ -1,0 +1,58 @@
+<div class="dashboard-container">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="logo">
+      <span class="logo-icon">E</span>
+      <span class="logo-text">EduLearn</span>
+    </div>
+    
+    <nav class="nav-menu">
+      <a routerLink="/instructor/dashboard" routerLinkActive="active" class="nav-item">
+        <span class="icon">🏠</span> {{trans.get('dashboard')}}
+      </a>
+      <a routerLink="/instructor/courses" routerLinkActive="active" class="nav-item">
+        <span class="icon">📚</span> Courses
+      </a>
+      <a routerLink="/instructor/create-exam" routerLinkActive="active" class="nav-item">
+        <span class="icon">📝</span> Exams
+      </a>
+      <a routerLink="/instructor/students" routerLinkActive="active" class="nav-item">
+        <span class="icon">👥</span> {{trans.get('student_list')}}
+      </a>
+      <a routerLink="/instructor/earnings" routerLinkActive="active" class="nav-item">
+        <span class="icon">💰</span> {{trans.get('earnings')}}
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <a (click)="logout()" class="logout" style="cursor: pointer;">
+        <span class="icon">🚪</span> {{trans.get('logout')}}
+      </a>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Header -->
+    <header class="header">
+      <div class="search-bar">
+        <input type="text" [placeholder]="trans.get('search')" (input)="onSearch($event)">
+      </div>
+      <div class="header-actions">
+        <button class="btn-lang" (click)="toggleLanguage()">
+          {{trans.getCurrentLang() === 'en' ? 'العربية' : 'English'}}
+        </button>
+        <button class="notification-btn">
+          <span class="icon">🔔</span>
+          <span class="badge" *ngIf="inquiries.length > 0"></span>
+        </button>
+        <div class="profile">
+          <img [src]="instructorAvatar" alt="Profile">
+        </div>
+      </div>
+    </header>
+
+    <!-- Dashboard Content -->
+    <router-outlet></router-outlet>
+  </main>
+</div>

@@ -1,0 +1,20 @@
+.page { padding: 32px; max-width: 1200px; }
+    .page-header { margin-bottom: 24px; }
+    .page-title { font-size: 26px; font-weight: 700; color: #172B4C; margin: 0 0 4px; }
+    .page-sub { color: #64748b; margin: 0; font-size: 14px; }
+    .card { background: #fff; border-radius: 16px; box-shadow: 0 2px 12px rgba(23,43,76,0.08); overflow: hidden; }
+    .data-table { width: 100%; border-collapse: collapse; }
+    .data-table th { padding: 14px 16px; text-align: left; font-size: 11px; font-weight: 700; color: #64748b; text-transform: uppercase; border-bottom: 2px solid #E5E5E7; background: #f8fafc; }
+    .data-table td { padding: 14px 16px; font-size: 14px; color: #172B4C; border-bottom: 1px solid #f0f4f8; vertical-align: middle; }
+    .muted { color: #64748b !important; }
+    .user-cell { display: flex; align-items: center; gap: 10px; }
+    .avatar { width: 34px; height: 34px; border-radius: 50%; background: #8b5cf6; color: #fff; font-weight: 700; font-size: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .name { display: block; font-weight: 600; font-size: 14px; }
+    .email { display: block; font-size: 11px; color: #64748b; }
+    .progress-bar { height: 8px; background: #E5E5E7; border-radius: 4px; width: 120px; margin-bottom: 4px; }
+    .progress-fill { height: 100%; background: #3B82F6; border-radius: 4px; transition: width 0.3s; }
+    .progress-fill.done { background: #059669; }
+    .progress-label { font-size: 11px; color: #64748b; font-weight: 600; }
+    .complete-badge { font-size: 13px; font-weight: 600; }
+    .complete-badge.yes { color: #059669; }
+    .loading-row, .empty-state { padding: 40px; text-align: center; color: #64748b; }

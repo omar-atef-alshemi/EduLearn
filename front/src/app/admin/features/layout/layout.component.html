@@ -1,0 +1,44 @@
+<div class="admin-shell">
+      <!-- SIDEBAR -->
+      <aside class="sidebar" [class.collapsed]="sidebarCollapsed">
+        <div class="sidebar-header">
+          <div class="logo">
+            <span class="logo-icon material-symbols-rounded">school</span>
+            <span class="logo-text" *ngIf="!sidebarCollapsed"> Admin</span>
+          </div>
+          <button class="collapse-btn material-symbols-rounded" (click)="sidebarCollapsed = !sidebarCollapsed">
+            {{ sidebarCollapsed ? 'chevron_right' : 'chevron_left' }}
+          </button>
+        </div>
+
+        <nav class="sidebar-nav">
+          <a
+            *ngFor="let item of navItems"
+            class="nav-item"
+            [routerLink]="['/admin', item.route]"
+            routerLinkActive="active"
+            [title]="item.label">
+            <span class="nav-icon material-symbols-rounded">{{ item.icon }}</span>
+            <span class="nav-label" *ngIf="!sidebarCollapsed">{{ item.label }}</span>
+          </a>
+        </nav>
+
+        <div class="sidebar-footer" *ngIf="!sidebarCollapsed">
+          <div class="user-info">
+            <div class="user-avatar">{{ initials }}</div>
+            <div class="user-details">
+              <span class="user-name">{{ auth.currentUser?.firstName }} {{ auth.currentUser?.lastName }}</span>
+            </div>
+          </div>
+          <button class="logout-btn" (click)="logout()">
+            <span class="material-symbols-rounded" style="font-size: 18px;">logout</span> 
+            Logout
+          </button>
+        </div>
+      </aside>
+
+      <!-- MAIN CONTENT -->
+      <main class="main-content">
+        <router-outlet></router-outlet>
+      </main>
+    </div>

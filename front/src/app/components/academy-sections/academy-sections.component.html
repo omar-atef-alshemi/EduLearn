@@ -1,0 +1,26 @@
+<section class="academy-sections-supreme">
+  <div class="container">
+    <div class="section-header animate-up">
+      <div class="supreme-badge">Our Academy</div>
+      <h2 class="supreme-title">Academic <span class="gradient-text">Departments</span></h2>
+      <p class="supreme-subtitle">Specialized learning paths designed to build expertise in modern technology.</p>
+    </div>
+
+    <div class="supreme-grid animate-up">
+      <div class="department-card" *ngFor="let subject of academySubjects; let i = index" [style.--i]="i + 1">
+        <div class="card-glow"></div>
+        <div class="card-inner">
+          <div class="dept-icon">
+            <i [class]="subject.icon"></i>
+          </div>
+          <h3 class="dept-title">{{subject.title}}</h3>
+          <p class="dept-desc">{{subject.desc}}</p>
+          
+          <a [routerLink]="['/roadmap', subject.id]" class="btn-dept">
+            View Roadmap <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

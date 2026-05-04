@@ -1,0 +1,93 @@
+<div class="exam-layout">
+  <aside class="nav-sidebar">
+    <div class="nav-header">
+      <h3 class="nav-title">QUESTION NAVIGATOR</h3>
+      
+      <div class="stats-grid">
+        <div class="stat-box">
+          <span class="stat-num">{{ getAnsweredCount() }}</span>
+          <span class="stat-label">Answered</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-num">{{ questions.length - getAnsweredCount() }}</span>
+          <span class="stat-label">Remaining</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="questions-grid">
+      <button 
+        *ngFor="let q of questions; let i = index" 
+        (click)="goToQuestion(i)"
+        [ngClass]="{
+          'is-current': i === currentQuestionIndex,
+          'is-answered': selectedAnswers[i] !== -1,
+          'is-unvisited': selectedAnswers[i] === -1 && i !== currentQuestionIndex
+        }">
+        {{ i + 1 }}
+      </button>
+    </div>
+
+    <div class="nav-legend">
+      <h4 class="legend-title">LEGEND</h4>
+      <div class="legend-item">
+        <span class="dot answered"></span>
+        <span>Answered</span>
+      </div>
+      <div class="legend-item">
+        <span class="dot current"></span>
+        <span>Current</span>
+      </div>
+      <div class="legend-item">
+        <span class="dot unvisited"></span>
+        <span>Unvisited</span>
+      </div>
+    </div>
+
+    <div class="exam-progress-section">
+      <div class="progress-info">
+        <span>Exam Progress</span>
+        <span>{{ (getAnsweredCount() / questions.length * 100) | number:'1.0-0' }}%</span>
+      </div>
+      <div class="progress-bar-container">
+        <div class="progress-bar-fill" [style.width.%]="(getAnsweredCount() / questions.length * 100)"></div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="exam-main">
+    <div class="exam-content" *ngIf="questions.length > 0">
+      <header class="content-header">
+        <span class="exam-badge">Exam Mode</span>
+        <h2>Final Assessment</h2>
+        <div class="timer-box">⏱️ 58:59</div>
+      </header>
+
+      <div class="question-container">
+        <div class="question-card">
+          <div class="q-header">
+            <span class="q-label">Question {{ currentQuestionIndex + 1 }}</span>
+          </div>
+          <p class="q-text">{{ questions[currentQuestionIndex].questionText.en }}</p>
+          
+          <div class="options-list">
+            <div 
+              class="option-row" 
+              *ngFor="let opt of questions[currentQuestionIndex].options.en; let j = index"
+              (click)="selectOption(j)"
+              [class.active-opt]="selectedAnswers[currentQuestionIndex] === j">
+              <span class="opt-circle">{{ j === 0 ? 'A' : j === 1 ? 'B' : j === 2 ? 'C' : 'D' }}</span>
+              <span class="opt-text">{{ opt }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-nav">
+          <button class="btn-plain" (click)="goToQuestion(currentQuestionIndex - 1)" [disabled]="currentQuestionIndex === 0">❮ Previous</button>
+          <button class="btn-blue" (click)="goToQuestion(currentQuestionIndex + 1)" *ngIf="currentQuestionIndex < questions.length - 1">Next Question ❯</button>
+          <button class="btn-green" *ngIf="currentQuestionIndex === questions.length - 1">Submit Final Exam</button>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

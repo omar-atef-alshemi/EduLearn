@@ -1,0 +1,150 @@
+<div class="page">
+
+      <!-- ── Header ── -->
+      <header class="page-header">
+        <div>
+          <h1 class="page-title">
+            <span class="material-symbols-rounded" style="vertical-align: middle; font-size: 28px;">school</span>
+            Students
+          </h1>
+          <p class="page-sub">Manage all student accounts</p>
+        </div>
+        <div class="header-stats">
+          <div class="stat-pill">
+            <span class="stat-num">{{ total }}</span>
+            <span class="stat-lbl">Total</span>
+          </div>
+          <div class="stat-pill active">
+            <span class="stat-num">{{ activeCount }}</span>
+            <span class="stat-lbl">Active</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- ── Filter / Search bar ── -->
+      <div class="filter-bar">
+        <div class="search-wrap">
+          <span class="search-icon">🔍</span>
+          <input
+            class="search-input"
+            [(ngModel)]="searchQuery"
+            (input)="onSearch()"
+            placeholder="Search by name or email..."
+          />
+          <button class="search-clear" *ngIf="searchQuery" (click)="clearSearch()">✕</button>
+        </div>
+        <select [(ngModel)]="activeFilter" (change)="load()">
+          <option value="">All Status</option>
+          <option value="true">Active</option>
+          <option value="false">Inactive</option>
+        </select>
+      </div>
+
+      <!-- ── Table ── -->
+      <div class="card table-card">
+        <div class="loading-row" *ngIf="loading">⟳ Loading students...</div>
+
+        <table class="data-table" *ngIf="!loading && students.length > 0">
+          <thead>
+            <tr>
+              <th>Student</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Certificate</th>
+              <th>Status</th>
+              <th>Joined</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let s of students">
+              <td>
+                <div class="user-cell">
+                  <div class="avatar" [class.avatar-inactive]="!s.userId?.isActive">
+                    {{ s.firstName ? s.firstName[0] : 'S' }}{{ s.lastName ? s.lastName[0] : '' }}
+                  </div>
+                  <span class="user-name">{{ s.firstName }} {{ s.lastName }}</span>
+                </div>
+              </td>
+              <td class="muted">{{ s.userId?.email || '—' }}</td>
+              <td>{{ s.phone || '—' }}</td>
+              <td>
+                <span class="cert-badge" *ngIf="s.certificateName">{{ s.certificateName }}</span>
+                <span class="muted" *ngIf="!s.certificateName">—</span>
+              </td>
+              <td>
+                <span class="badge" [ngClass]="s.userId?.isActive ? 'badge-active' : 'badge-inactive'">
+                  {{ s.userId?.isActive ? 'Active' : 'Inactive' }}
+                </span>
+              </td>
+              <td class="muted">{{ s.createdAt | date:'mediumDate' }}</td>
+              <td class="actions-cell">
+                <button class="btn-sm btn-edit"    (click)="openEditModal(s)">✏️ Edit</button>
+                
+                <button class="btn-sm btn-danger"  (click)="delete(s)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="empty-state" *ngIf="!loading && students.length === 0">
+          <p>🎓</p>
+          <p>No students found.</p>
+        </div>
+      </div>
+
+      <!-- ── Pagination ── -->
+      <div class="pagination" *ngIf="pages > 1">
+        <button [disabled]="page <= 1"    (click)="changePage(page - 1)">‹ Prev</button>
+        <span>Page {{ page }} of {{ pages }}</span>
+        <button [disabled]="page >= pages" (click)="changePage(page + 1)">Next ›</button>
+      </div>
+
+      <!-- ── Edit Modal ── -->
+      <div class="modal-overlay" *ngIf="editingStudent" (click)="closeEditModal()">
+        <div class="modal-box" (click)="$event.stopPropagation()">
+
+          <div class="modal-header">
+            <div class="modal-title-wrap">
+              <div class="modal-avatar">
+                {{ editingStudent.firstName?.[0] }}{{ editingStudent.lastName?.[0] }}
+              </div>
+              <div>
+                <h2 class="modal-title">Edit Student</h2>
+                <p class="modal-sub">{{ editingStudent.userId?.email }}</p>
+              </div>
+            </div>
+            <button class="modal-close" (click)="closeEditModal()">✕</button>
+          </div>
+
+          <form [formGroup]="editForm" (ngSubmit)="submitUpdate()" class="form-grid">
+            <div class="form-group">
+              <label>First Name *</label>
+              <input formControlName="firstName" placeholder="Ahmed" />
+            </div>
+            <div class="form-group">
+              <label>Last Name *</label>
+              <input formControlName="lastName" placeholder="Mohamed" />
+            </div>
+            <div class="form-group">
+              <label>Phone</label>
+              <input formControlName="phone" placeholder="+20 1xx xxx xxxx" />
+            </div>
+            <div class="form-group">
+              <label>Certificate Name</label>
+              <input formControlName="certificateName" placeholder="e.g. Full Stack Developer" />
+            </div>
+            <div class="form-actions">
+              <button type="button" class="btn-outline-md" (click)="closeEditModal()">Cancel</button>
+              <button type="submit" class="btn-primary" [disabled]="editForm.invalid || updating">
+                {{ updating ? 'Saving...' : 'Save Changes' }}
+              </button>
+            </div>
+          </form>
+
+          <div class="alert alert-error"   *ngIf="editError">{{ editError }}</div>
+          <div class="alert alert-success" *ngIf="editSuccess">{{ editSuccess }}</div>
+        </div>
+      </div>
+
+    </div>

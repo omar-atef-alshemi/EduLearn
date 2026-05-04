@@ -1,0 +1,58 @@
+<div class="page">
+      <header class="page-header">
+        <div>
+          <h1 class="page-title">
+            <span class="material-symbols-rounded" style="vertical-align: middle; font-size: 28px;">trending_up</span>
+            Student Progress
+          </h1>
+          <p class="page-sub">Track all student course progress</p>
+        </div>
+      </header>
+
+      <div class="card table-card">
+        <div class="loading-row" *ngIf="loading">⟳ Loading progress data...</div>
+        <table class="data-table" *ngIf="!loading && progress.length > 0">
+          <thead>
+            <tr>
+              <th>Student</th>
+              <th>Course</th>
+              <th>Completion</th>
+              <th>Time Spent</th>
+              <th>Completed</th>
+              <th>Last Updated</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let p of progress">
+              <td>
+                <div class="user-cell">
+                  <div class="avatar">{{ p.userId?.firstName?.[0] }}{{ p.userId?.lastName?.[0] }}</div>
+                  <div>
+                    <span class="name">{{ p.userId?.firstName }} {{ p.userId?.lastName }}</span>
+                    <span class="email">{{ p.userId?.email }}</span>
+                  </div>
+                </div>
+              </td>
+              <td class="muted">{{ p.courseId?.title?.ar || p.courseId?.title?.en }}</td>
+              <td>
+                <div class="progress-bar">
+                  <div class="progress-fill" [style.width.%]="p.completionPercentage" [class.done]="p.isCourseCompleted"></div>
+                </div>
+                <span class="progress-label">{{ p.completionPercentage }}%</span>
+              </td>
+              <td>{{ formatTime(p.totalTimeSpent) }}</td>
+              <td>
+                <span class="complete-badge" [class.yes]="p.isCourseCompleted">
+                  <span class="material-symbols-rounded" style="font-size:16px; vertical-align:sub;">
+                    {{ p.isCourseCompleted ? 'check_circle' : 'schedule' }}
+                  </span>
+                  {{ p.isCourseCompleted ? 'Yes' : 'No' }}
+                </span>
+              </td>
+              <td class="muted">{{ p.updatedAt | date:'mediumDate' }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="empty-state" *ngIf="!loading && progress.length === 0">No progress data yet.</div>
+      </div>
+    </div>

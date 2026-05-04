@@ -1,0 +1,40 @@
+<div class="page">
+      <header class="page-header">
+        <div>
+          <h1 class="page-title">
+            <span class="material-symbols-rounded" style="vertical-align: middle; font-size: 28px;">star</span>
+            Reviews
+          </h1>
+          <p class="page-sub">Manage featured reviews shown on homepage</p>
+        </div>
+      </header>
+
+      <div class="info-banner">
+        💡 Toggle "Featured" to show/hide reviews on the public homepage. Only <strong>featured</strong> reviews appear as testimonials.
+      </div>
+
+      <div class="reviews-grid" *ngIf="!loading">
+        <div class="review-card" *ngFor="let r of reviews" [class.featured]="r.isFeatured">
+          <div class="review-header">
+            <div class="reviewer">
+              <div class="avatar">{{ r.studentId?.firstName?.[0] }}{{ r.studentId?.lastName?.[0] }}</div>
+              <div>
+                <span class="reviewer-name">{{ r.studentId?.firstName }} {{ r.studentId?.lastName }}</span>
+                <span class="review-date">{{ r.createdAt | date:'mediumDate' }}</span>
+              </div>
+            </div>
+            <div class="stars">{{ getStars(r.rating) }}</div>
+          </div>
+          <p class="review-comment">{{ r.comment || 'No comment.' }}</p>
+          <div class="review-footer">
+            <span class="featured-badge" *ngIf="r.isFeatured">⭐ Featured</span>
+            <button class="toggle-btn" [class.un-feature]="r.isFeatured" (click)="toggle(r)">
+              {{ r.isFeatured ? 'Unfeature' : 'Feature' }}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="loading-state" *ngIf="loading">⟳ Loading reviews...</div>
+      <div class="empty-state" *ngIf="!loading && reviews.length === 0">No reviews yet.</div>
+    </div>

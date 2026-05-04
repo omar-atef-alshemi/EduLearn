@@ -1,0 +1,235 @@
+<div class="page">
+
+      <!-- HEADER -->
+      <header class="page-header">
+        <div>
+          <h1 class="page-title">
+            <span class="material-symbols-rounded" style="vertical-align: middle; font-size: 28px;">menu_book</span>
+            Courses
+          </h1>
+          <p class="page-sub">Manage all courses — {{ total }} total</p>
+        </div>
+      </header>
+
+      <!-- FILTERS -->
+      <div class="filter-bar">
+        <select [(ngModel)]="statusFilter" (change)="page = 1; load()" [disabled]="loading">
+          <option value="">All Status</option>
+          <option value="pending">Pending</option>
+          <option value="approved">Approved</option>
+          <option value="rejected">Rejected</option>
+        </select>
+        <select [(ngModel)]="categoryFilter" (change)="page = 1; load()" [disabled]="loading">
+          <option value="">All Categories</option>
+          <option value="programming">Programming</option>
+          <option value="design">Design</option>
+          <option value="business">Business</option>
+          <option value="marketing">Marketing</option>
+        </select>
+      </div>
+
+      <!-- TABLE -->
+      <div class="card table-card">
+        <div class="loading-row" *ngIf="loading">⟳ Loading...</div>
+
+        <table class="data-table" *ngIf="!loading && courses.length > 0">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Instructor</th>
+              <th>Category</th>
+              <th>Price</th>
+              <th>Status</th>
+              <th>Published</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let c of courses">
+              <td class="course-title">
+                <div class="title-en">{{ c.title?.en || '—' }}</div>
+                <div class="title-ar">{{ c.title?.ar || '—' }}</div>
+              </td>
+              <td class="muted">{{ c.instructorId?.firstName }} {{ c.instructorId?.lastName }}</td>
+              <td><span class="category-badge">{{ c.category }}</span></td>
+              <td class="price">{{ c.price }} EGP</td>
+              <td>
+                <select
+                  [ngModel]="c.status"
+                  (change)="onStatusChange(c, $any($event.target).value)"
+                  class="status-select"
+                  [ngClass]="'select-' + c.status">
+                  <option value="pending">⏳ Pending</option>
+                  <option value="approved">✅ Approved</option>
+                  <option value="rejected">❌ Rejected</option>
+                </select>
+              </td>
+              <td>
+                <span class="pub-dot" [class.published]="c.isPublished">
+                  {{ c.isPublished ? '● Live' : '○ Draft' }}
+                </span>
+              </td>
+              <td class="actions-cell">
+                <button class="btn-icon btn-view" (click)="openModal(c)" title="View Details">👁️</button>
+                <button class="btn-icon btn-danger" (click)="delete(c)" title="Delete">🗑️</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="empty-state" *ngIf="!loading && courses.length === 0">No courses found.</div>
+      </div>
+
+      <!-- PAGINATION -->
+      <div class="pagination" *ngIf="pages > 1">
+        <button [disabled]="page <= 1" (click)="changePage(page - 1)">‹ Prev</button>
+        <span>Page {{ page }} of {{ pages }}</span>
+        <button [disabled]="page >= pages" (click)="changePage(page + 1)">Next ›</button>
+      </div>
+
+    </div>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!--  MODAL                                     -->
+    <!-- ══════════════════════════════════════════ -->
+    <div class="modal-overlay" *ngIf="modalOpen" (click)="closeModal()">
+      <div class="modal" (click)="$event.stopPropagation()">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <div class="modal-title-wrap">
+            <h2 class="modal-title">{{ selectedCourse?.title?.en || 'Course Details' }}</h2>
+            <p class="modal-title-ar">{{ selectedCourse?.title?.ar }}</p>
+          </div>
+          <button class="modal-close" (click)="closeModal()">✕</button>
+        </div>
+
+        <!-- Modal Loading -->
+        <div class="modal-loading" *ngIf="modalLoading">
+          <div class="spinner"></div>
+          <p>Loading details…</p>
+        </div>
+
+        <!-- Modal Body -->
+        <div class="modal-body" *ngIf="!modalLoading && selectedCourse">
+
+          <!-- Thumbnail -->
+          <div class="thumbnail-wrap" *ngIf="selectedCourse.thumbnail">
+            <img [src]="selectedCourse.thumbnail" alt="Course thumbnail" class="thumbnail" />
+          </div>
+
+          <!-- Basic Info -->
+          <div class="detail-section">
+            <div class="detail-section-title">📋 Basic Info</div>
+            <div class="detail-grid">
+              <div class="detail-item">
+                <span class="detail-key">Title (EN)</span>
+                <span class="detail-val">{{ selectedCourse.title?.en || '—' }}</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-key">Title (AR)</span>
+                <span class="detail-val ar">{{ selectedCourse.title?.ar || '—' }}</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-key">Category</span>
+                <span class="detail-val">{{ selectedCourse.category || '—' }}</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-key">Price</span>
+                <span class="detail-val highlight">{{ selectedCourse.price }} EGP</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-key">Status</span>
+                <span class="status-pill" [ngClass]="selectedCourse.status">
+                  {{ selectedCourse.status | titlecase }}
+                </span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-key">Published</span>
+                <span class="detail-val">{{ selectedCourse.isPublished ? '✅ Live' : '❌ Draft' }}</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-key">Created</span>
+                <span class="detail-val">{{ selectedCourse.createdAt | date:'MMM d, y' }}</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-key">Updated</span>
+                <span class="detail-val">{{ selectedCourse.updatedAt | date:'MMM d, y' }}</span>
+              </div>
+              <div class="detail-item full-width" *ngIf="selectedCourse.description?.en">
+                <span class="detail-key">Description (EN)</span>
+                <span class="detail-val">{{ selectedCourse.description.en }}</span>
+              </div>
+              <div class="detail-item full-width" *ngIf="selectedCourse.description?.ar">
+                <span class="detail-key">Description (AR)</span>
+                <span class="detail-val ar">{{ selectedCourse.description.ar }}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Instructor -->
+          <div class="detail-section" *ngIf="selectedCourse.instructorId">
+            <div class="detail-section-title">👨‍🏫 Instructor</div>
+            <div class="detail-grid">
+              <div class="detail-item">
+                <span class="detail-key">Name</span>
+                <span class="detail-val">
+                  {{ selectedCourse.instructorId?.firstName }} {{ selectedCourse.instructorId?.lastName }}
+                </span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-key">Email</span>
+                <span class="detail-val">{{ selectedCourse.instructorId?.email || '—' }}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sections -->
+          <div class="detail-section" *ngIf="selectedCourse.sections?.length > 0">
+            <div class="detail-section-title">
+              📂 Sections
+              <span class="count-badge">{{ selectedCourse.sections.length }}</span>
+            </div>
+            <div class="sections-list">
+              <div class="section-item" *ngFor="let s of selectedCourse.sections; let i = index">
+                <div class="section-header">
+                  <div class="section-left">
+                    <span class="section-num">{{ i + 1 }}</span>
+                    <div>
+                      <div class="section-title-en">{{ s.title?.en }}</div>
+                      <div class="section-title-ar">{{ s.title?.ar }}</div>
+                    </div>
+                  </div>
+                  <div class="section-right">
+                    <span class="section-status" [ngClass]="s.status">{{ s.status | titlecase }}</span>
+                    <span class="section-meta" *ngIf="s.totalDuration">⏱ {{ s.totalDuration }} min</span>
+                    <span class="section-meta">📄 {{ s.contents?.length || 0 }} contents</span>
+                    <span class="section-meta" *ngIf="s.exam">📝 Has Exam</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Final Exam -->
+          <div class="detail-section" *ngIf="selectedCourse.finalExam">
+            <div class="detail-section-title">🏁 Final Exam</div>
+            <div class="detail-grid">
+              <div class="detail-item">
+                <span class="detail-key">Title (EN)</span>
+                <span class="detail-val">{{ selectedCourse.finalExam?.title?.en || '—' }}</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-key">Status</span>
+                <span class="status-pill" [ngClass]="selectedCourse.finalExam?.status">
+                  {{ selectedCourse.finalExam?.status | titlecase }}
+                </span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- END modal-body -->
+
+      </div>
+    </div>

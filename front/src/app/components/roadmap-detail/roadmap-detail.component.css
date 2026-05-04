@@ -1,0 +1,1189 @@
+/* =============================================
+   ROADMAP DETAIL - Design System Aliases
+   Maps old variable names to global design system
+   ============================================= */
+:root {
+  --accent-blue: #3B82F6;
+  --bg-main: #F8FAFC;
+  --card-bg: #ffffff;
+  --text-main: #0A0A0A;
+  --text-dim: #475569;
+  --border-soft: #E5E5E7;
+  --grid-color: #E5E5E7;
+  --btn-glow: rgba(59, 130, 246, 0.25);
+  --bg-section: #F8FAFC;
+  --text-primary: #0A0A0A;
+  --text-secondary: #475569;
+}
+
+/* Dark mode via [data-theme='dark'] on <html> */
+[data-theme='dark'] {
+  --accent-blue: #3B82F6;
+  --bg-main: #030303;
+  --card-bg: #111111;
+  --text-main: #F8FAFC;
+  --text-dim: #94A3B8;
+  --border-soft: rgba(255, 255, 255, 0.08);
+  --grid-color: rgba(255, 255, 255, 0.08);
+  --btn-glow: rgba(59, 130, 246, 0.35);
+  --bg-section: #030303;
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+}
+
+/* Legacy support for older body.dark-mode / body:not(.light-mode) patterns */
+body.dark-mode {
+  --accent-blue: #3B82F6;
+  --bg-main: #030303;
+  --card-bg: #111111;
+  --text-main: #F8FAFC;
+  --text-dim: #94A3B8;
+  --border-soft: rgba(255, 255, 255, 0.08);
+  --grid-color: rgba(255, 255, 255, 0.08);
+  --btn-glow: rgba(59, 130, 246, 0.35);
+  --bg-section: #030303;
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+}
+
+* {
+  box-sizing: border-box;
+}
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+}
+section, .curriculum-timeline, .benefits-section, .stats-section {
+  overflow-x: hidden;
+}
+
+/* --- Global Smooth Transition --- */
+* {
+  transition: background 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* --- Floating Theme Button --- */
+.theme-toggle-btn {
+  position: fixed;
+  top: 30px;
+  right: 30px;
+  z-index: 9999;
+  background: var(--accent-blue);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 10px 20px var(--btn-glow);
+  font-weight: 800;
+  border: 2px solid rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* --- Stats Grid Section --- */
+.stats-section {
+  padding: 60px 20px;
+  background: var(--bg-main);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.stat-card {
+  background: var(--card-bg);
+  border: 1px solid var(--grid-color);
+  padding: 30px;
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  backdrop-filter: blur(15px);
+}
+
+.stat-card:hover {
+  border-color: var(--accent-blue);
+  box-shadow: 0 15px 40px var(--btn-glow);
+}
+
+.icon-container {
+  width: 60px;
+  height: 60px;
+  background: rgba(59, 130, 246, 0.1);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-blue);
+  font-size: 1.5rem;
+}
+
+.label {
+  display: block;
+  color: var(--text-dim);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.value {
+  color: var(--text-main);
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+
+/* --- Who Is This Track For Section --- */
+.audience-section {
+  padding: 80px 20px;
+  background: var(--bg-main);
+  text-align: center;
+}
+
+.section-title {
+  color: var(--accent-blue);
+  font-size: 2.2rem;
+  font-weight: 900;
+  margin-bottom: 50px;
+  text-transform: uppercase;
+}
+
+.audience-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  gap: 25px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.audience-card {
+  background: var(--card-bg);
+  border: 1px solid var(--grid-color);
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 35px 45px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hover: الحجم ثابت - الألوان تتغير فقط */
+.audience-card:hover {
+  background: var(--accent-blue) !important;
+  border-color: transparent;
+  box-shadow: 0 15px 35px var(--btn-glow);
+}
+
+.audience-content p {
+  color: var(--text-main);
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-align: left;
+}
+
+.audience-card:hover .audience-content p {
+  color: #ffffff;
+}
+
+.audience-circle {
+  width: 75px;
+  height: 75px;
+  background: #ffffff;
+  border: 4px solid var(--accent-blue);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.audience-circle i {
+  color: var(--accent-blue);
+  font-size: 2rem;
+}
+
+/* حل مشكلة اللوجو في الهوفر للمودين */
+.audience-card:hover .audience-circle {
+  background: var(--bg-main); /* يقلب لون الخلفية الأساسي */
+  border-color: #ffffff;
+}
+
+/* في اللايت مود الهوفر يخلي الدائرة غامقة عشان الأيقونة البيضاء تبان */
+body.light-mode .audience-card:hover .audience-circle {
+  background: #0f172a; 
+}
+
+.audience-card:hover .audience-circle i {
+  color: #ffffff;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .audience-grid { grid-template-columns: 1fr; }
+  .audience-card { padding: 25px; flex-direction: column-reverse; gap: 20px; text-align: center; }
+  .audience-content p { text-align: center; }
+  .theme-toggle-btn { top: 15px; right: 15px; padding: 8px 15px; }
+}
+/* الحل: تغيير سلوك الدائرة عند تمرير الماوس */
+.audience-card:hover .audience-circle {
+  /* الافتراضي (الدارك مود): الدائرة تأخذ لون الخلفية الغامق (أسود أو كحلي) */
+  background: var(--bg-main); 
+  border-color: #ffffff; /* إطار أبيض لتحديد الدائرة فوق الخلفية الزرقاء */
+}
+
+/* في الـ Light Mode حصراً: تغيير لون الدائرة في الـ Hover */
+body.light-mode .audience-card:hover .audience-circle {
+  /* نستخدم لوناً غامقاً جداً للدائرة في اللايت مود لتبرز الأيقونة البيضاء */
+  background: #0f172a; 
+  border-color: #ffffff;
+}
+
+/* التأكد من أن الأيقونة تبقى بيضاء عند الـ Hover في كلا المودين */
+.audience-card:hover .audience-circle i {
+  color: #ffffff !important;
+}
+/* --- تأثير الـ Hover على الكارت والدائرة --- */
+
+.audience-card:hover {
+  background: var(--accent-blue) !important;
+  border-color: transparent;
+}
+
+/* الدائرة في حالة الـ Hover تقلب أسود في المودين */
+.audience-card:hover .audience-circle {
+  background: #000000 !important; /* أسود صريح */
+  border-color: #ffffff; /* إطار أبيض عشان يحددها فوق الأزرق */
+  transform: none !important; /* ثبات الحجم كما طلبت */
+}
+
+/* الأيقونة داخل الدائرة تقلب أبيض */
+.audience-card:hover .audience-circle i {
+  color: #ffffff !important;
+  transition: color 0.3s ease;
+}
+
+/* لضمان ثبات النص وتناسقه */
+.audience-card:hover .audience-content p {
+  color: #ffffff;
+}
+/* 1. السلاسة وتنسيق الصفحة */
+* {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.content-section {
+  padding: 100px 20px;
+  background: var(--bg-main);
+}
+
+.main-title {
+  color: var(--accent-blue);
+  text-align: center;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 900;
+  margin-bottom: 80px;
+  text-transform: uppercase;
+}
+
+/* 2. نظام التايم لاين (عكس عكاس) */
+.timeline-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.timeline-item {
+  display: grid;
+  grid-template-columns: 1fr 150px 2fr;
+  align-items: center;
+  margin-bottom: 100px;
+}
+
+/* حركة العكس */
+.timeline-item.reverse .duration-box { order: 3; text-align: left; padding-left: 50px; padding-right: 0; }
+.timeline-item.reverse .content-card { order: 1; }
+.timeline-item.reverse .timeline-middle { order: 2; }
+
+/* 3. الأرقام والمدة (أبيض في الدارك) */
+.step-number {
+  font-size: 5.5rem;
+  font-weight: 900;
+  color: #ffffff;
+  opacity: 0.8;
+  line-height: 1;
+}
+
+.duration-box { text-align: right; padding-right: 50px; }
+.duration-label { color: var(--accent-blue); font-weight: 800; font-size: 0.9rem; text-transform: uppercase; }
+.duration-value { color: #ffffff; font-size: 1.4rem; font-weight: 600; }
+
+/* 4. الكارت (بدون سواد في اللايت مود) */
+.content-card {
+  background: #0d0d0d; /* خلفية الدارك */
+  border: 1px solid rgba(0, 102, 255, 0.1);
+  padding: 45px;
+  border-radius: 30px;
+}
+
+.content-card:hover {
+  border-color: var(--accent-blue);
+  box-shadow: 0 20px 40px rgba(0, 102, 255, 0.15);
+}
+
+.course-title { color: var(--accent-blue); font-size: 1.8rem; font-weight: 800; margin-bottom: 20px; display: block; }
+.features-list { list-style: none; padding: 0; }
+.features-list li { color: #cccccc; margin-bottom: 12px; padding-left: 25px; position: relative; }
+.features-list li::before { content: "→"; position: absolute; left: 0; color: var(--accent-blue); font-weight: bold; }
+
+/* 5. الحل النهائي للـ Light Mode (بيفرمل أي سواد) */
+body.light-mode .content-section { background: #f8fafc; }
+
+body.light-mode .content-card {
+  background: #ffffff !important; /* أبيض صريح */
+  border-color: #e2e8f0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+body.light-mode .step-number { color: #0f172a !important; opacity: 0.1; }
+body.light-mode .duration-value { color: #1e293b !important; }
+body.light-mode .features-list li { color: #475569 !important; }
+
+/* Mobile */
+@media (max-width: 992px) {
+  .timeline-item, .timeline-item.reverse { grid-template-columns: 1fr; text-align: center; gap: 30px; }
+  .duration-box, .timeline-item.reverse .duration-box { text-align: center; padding: 0; }
+  .timeline-item.reverse .content-card, .timeline-item.reverse .timeline-middle { order: unset; }
+}
+/* Variables are defined at the top of the file via design system aliases */
+
+/* --- 3. التنسيق باستخدام المتغيرات --- */
+.content-section {
+  padding: 100px 20px;
+  background-color: var(--bg-section); /* دي اللي بتبدل المود */
+  transition: background 0.4s ease;
+}
+
+.timeline-item {
+  display: grid;
+  grid-template-columns: 1fr 150px 2fr;
+  align-items: center;
+  margin-bottom: 100px;
+}
+
+/* التوقيت والمدة */
+.duration-value {
+  color: var(--text-primary); /* أبيض في الدارك، أسود في اللايت */
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+/* الرقم العملاق */
+.step-number {
+  font-size: 5.5rem;
+  font-weight: 900;
+  color: var(--text-primary); /* العكس بالعكس تماماً */
+  opacity: 0.15; /* خليته شفاف شوية لشكل أشيك */
+}
+
+/* الكارت */
+.content-card {
+  background-color: var(--card-bg);
+  border: 1px solid rgba(59, 130, 246, 0.1);
+  padding: 40px;
+  border-radius: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.course-title {
+  color: var(--accent); /* الأزرق يفضل بطل في المودين */
+  font-size: 1.8rem;
+  font-weight: 800;
+}
+
+.features-list li {
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+
+/* --- 4. نظام عكس عكاس --- */
+.timeline-item.reverse .duration-box { order: 3; text-align: left; padding-left: 50px; }
+.timeline-item.reverse .content-card { order: 1; }
+.timeline-item.reverse .timeline-middle { order: 2; }
+
+@media (max-width: 992px) {
+  .timeline-item { grid-template-columns: 1fr; text-align: center; }
+  .timeline-item.reverse .duration-box { text-align: center; padding: 0; }
+}
+/* --- 1. تأسيس السيكشن (Dark Mode) --- */
+ /* --- السيكشن والخط --- */
+.curriculum-timeline {
+  padding: 100px 0;
+  background-color: var(--bg-main); /* بيقرأ من الـ variables بتاعتك */
+  position: relative;
+  transition: background-color 0.3s ease;
+}
+
+.timeline-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.vertical-line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--accent-blue);
+  opacity: 0.15;
+  transform: translateX(-50%);
+}
+
+/* --- نظام الصفوف --- */
+.timeline-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.side-content {
+  width: 45%;
+  padding: 0 40px;
+}
+
+/* --- الدائرة الرقمية (Premium Look) --- */
+.center-marker {
+  width: 10%;
+  display: flex;
+  justify-content: center;
+  z-index: 10;
+}
+
+.step-ring {
+  width: 55px;
+  height: 55px;
+  background: var(--bg-main);
+  border: 3px solid var(--accent-blue);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 15px var(--btn-glow);
+}
+
+.step-num {
+  color: var(--accent-blue);
+  font-size: 1.5rem;
+  font-weight: 900;
+}
+
+/* --- الكارت (Dark & Light Mode Ready) --- */
+.roadmap-card {
+  background: var(--card-bg); /* بيستخدم اللون اللي انت حددته */
+  border: 1px solid var(--grid-color);
+  padding: 30px;
+  border-radius: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.roadmap-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.card-head {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.blue-icon { color: var(--accent-blue); font-size: 1.3rem; }
+
+.roadmap-card h3 {
+  color: var(--accent-blue);
+  font-size: 1.3rem;
+  font-weight: 800;
+  margin: 0;
+}
+
+.points-list { list-style: none; padding: 0; margin: 0; }
+.points-list li {
+  color: var(--text-dim);
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+  padding-left: 20px;
+  position: relative;
+}
+.points-list li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--accent-blue);
+}
+
+/* --- المدة --- */
+.time-label { display: block; color: var(--accent-blue); font-weight: 800; font-size: 0.7rem; letter-spacing: 1.5px; }
+.time-value { color: var(--text-main); font-size: 1.2rem; font-weight: 700; }
+
+/* --- نظام العكس (Reverse) --- */
+.timeline-row.reverse-row { flex-direction: row-reverse; }
+.timeline-row.reverse-row .time-box { text-align: right; }
+
+/* --- التجاوب مع الموبايل --- */
+@media (max-width: 992px) {
+  .vertical-line { left: 40px; transform: none; }
+  .timeline-row, .timeline-row.reverse-row { flex-direction: column; align-items: flex-start; padding-left: 80px; }
+  .side-content { width: 100%; padding: 0; }
+  .center-marker { position: absolute; left: 12px; }
+  .time-box { text-align: left !important; margin-top: 15px; }
+}
+/* --- إعدادات الأنيميشن الابتدائية --- */
+.timeline-row {
+  opacity: 0;
+  transform: translateY(50px); /* بتبدأ من تحت شوية */
+  transition: all 0.8s cubic-bezier(0.17, 0.55, 0.55, 1);
+}
+
+/* الحالة لما العنصر يدخل في مجال الرؤية */
+.timeline-row.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* تأخير زمني لكل خطوة عشان يظهروا ورا بعض (Stagger Effect) */
+.timeline-row:nth-child(1) { transition-delay: 0.1s; }
+.timeline-row:nth-child(2) { transition-delay: 0.3s; }
+.timeline-row:nth-child(3) { transition-delay: 0.5s; }
+.timeline-row:nth-child(4) { transition-delay: 0.7s; }
+.timeline-row:nth-child(5) { transition-delay: 0.9s; }
+
+/* تأثير بسيط للدائرة عشان تنور أول ما تظهر */
+.timeline-row.active .step-ring {
+  animation: pulse-blue 2s infinite;
+}
+
+@keyframes pulse-blue {
+  0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); }
+  70% { box-shadow: 0 0 0 15px rgba(59, 130, 246, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+}
+/* =========================================
+   CURRICULUM TIMELINE - FINAL VERSION
+   ========================================= */
+
+.curriculum-timeline {
+  padding: 100px 0;
+  background-color: var(--bg-main);
+  position: relative;
+  overflow: hidden;
+}
+
+/* الخط النصفي */
+.vertical-line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--accent-blue);
+  opacity: 0.2;
+  transform: translateX(-50%);
+}
+
+.timeline-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 80px;
+  /* إعدادات الأنيميشن الابتدائية */
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s cubic-bezier(0.17, 0.55, 0.55, 1);
+}
+
+.timeline-row.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- الكارت (The Master Card) --- */
+.roadmap-card {
+   width: 100%;
+  max-width: 650px; /* يخليها كبيرة بس مش متمددة زيادة */
+  padding: 45px;
+  border-radius: 24px;
+  position: relative;
+  transition: all 0.4s ease;
+  
+  /* البوردر الأزرق الصريح - الحل النهائي */
+  border: 4px solid #3b82f6 !important; 
+  background: rgba(255, 255, 255, 0.03); /* Glass effect */
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* الدارك مود: خلفية سوداء فحمية لتبرز البوردر */
+body:not(.light-mode) .roadmap-card {
+  background: #000000 !important;
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+}
+
+/* اللايت مود: خلفية بيضاء صريحة */
+body.light-mode .roadmap-card {
+  background: #ffffff !important;
+  border-color: #2563eb !important; /* أزرق أغمق للوضوح */
+  box-shadow: 0 10px 30px rgba(59, 130, 246, 0.1);
+}
+
+.roadmap-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  border-color: #60a5fa !important;
+  box-shadow: 0 0 40px rgba(59, 130, 246, 0.4);
+}
+
+/* --- الدائرة والارقام --- */
+.center-marker {
+  width: 10%;
+  display: flex;
+  justify-content: center;
+  z-index: 10;
+}
+
+.step-ring {
+  width: 60px;
+  height: 60px;
+  background: var(--bg-main);
+  border: 3px solid var(--accent-blue);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 20px var(--btn-glow);
+}
+
+.step-num {
+  color: var(--accent-blue);
+  font-size: 1.6rem;
+  font-weight: 900;
+}
+
+/* --- نصوص الكارت --- */
+.card-head h3 {
+  color: var(--accent-blue);
+  font-weight: 800;
+  margin-bottom: 15px;
+}
+
+.points-list li {
+  color: var(--text-dim);
+  margin-bottom: 10px;
+  list-style: none;
+  position: relative;
+  padding-left: 20px;
+}
+
+.points-list li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--accent-blue);
+}
+
+/* في اللايت مود نغمق نصوص الليست */
+body.light-mode .points-list li {
+  color: #1e293b !important;
+}
+
+/* --- تعديل صندوق المدة (Estimation) --- */
+.duration-side {
+  width: 45%; 
+  padding: 0 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* ده بيضمن إن العناصر متخرجش بره العرض */
+  max-width: 45%; 
+}
+
+/* كلمة ESTIMATION */
+.time-label {
+  display: block;
+  color: var(--accent-blue);
+  font-weight: 800;
+  font-size: 0.8rem; /* صغرنا الحجم شوية للتناسق */
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+/* قيمة الوقت (مثلاً 45 Hours) */
+.time-value {
+  color: var(--text-main);
+  font-size: 1.4rem;
+  font-weight: 900;
+  margin: 0;
+  line-height: 1.2;
+}
+
+/* --- التحكم في المحاذاة (يمين وشمال) --- */
+
+/* الصفوف العادية: الكلام على الشمال */
+.timeline-row:not(.reverse-row) .duration-side {
+  text-align: left;
+  align-items: flex-start;
+}
+
+/* الصفوف المعكوسة: الكلام على اليمين */
+.timeline-row.reverse-row .duration-side {
+  text-align: right;
+  align-items: flex-end;
+}
+
+/* تعديل بسيط للايت مود عشان الأرقام تظهر */
+body.light-mode .time-value {
+  color: #0f172a !important;
+}
+
+/* --- تعديل الموبايل عشان ميبوظش --- */
+@media (max-width: 992px) {
+  .duration-side {
+    width: 100% !important;
+    max-width: 100% !important;
+    text-align: left !important;
+    align-items: flex-start !important;
+    padding: 15px 0 0 0 !important;
+  }
+}
+
+
+.timeline-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+gap: 100px;
+}
+.timeline-row.reverse-row .side-content {
+  padding: 0 30px;
+}
+.side-content {
+  width: 45%;
+}
+
+.center-marker {
+  width: 10%;
+  display: flex;
+  justify-content: center;
+}
+.side-content {
+  padding: 0 20px; /* أقل + متساوي */
+}
+/* مسافة ثابتة من الرقم للكارد (يمين وشمال) */
+.card-side {
+  display: flex;
+}
+
+.timeline-row:not(.reverse-row) .card-side {
+  justify-content: flex-end;
+  padding-right: 60px; /* 👈 المسافة من الرقم */
+}
+
+.timeline-row.reverse-row .card-side {
+  justify-content: flex-start;
+  padding-left: 60px; /* 👈 نفس المسافة بالظبط */
+}
+/* ================================
+   PATH HEADER (Clean + Scalable)
+================================ */
+
+/* --- Header --- */
+.path-header {
+  width: 100%;
+  padding: 100px 20px 60px;
+  text-align: center;
+  background-color: var(--bg-main);
+  border-bottom: 1px solid var(--border-soft);
+  transition: all 0.3s ease;
+}
+
+/* --- Badge --- */
+.badge {
+  background: rgba(59, 130, 246, 0.1);
+  color: var(--accent-blue);
+  padding: 8px 20px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  display: inline-block;
+  margin-bottom: 25px;
+  text-transform: uppercase;
+}
+
+/* --- Title --- */
+.path-title {
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: 20px;
+  letter-spacing: -1px;
+  line-height: 1.2;
+}
+
+/* --- Description --- */
+.path-desc {
+  max-width: 750px;
+  margin: 0 auto;
+  font-size: 1.2rem;
+  color: var(--text-dim);
+  line-height: 1.7;
+}
+
+/* ================================
+   STATS SECTION (Aligned with Header)
+================================ */
+
+.stats-section {
+  margin-top: 0;
+  padding-top: 50px;
+  background-color: var(--bg-main);
+  border: none;
+}
+
+/* ================================
+   CONTAINER
+================================ */
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+/* ================================
+   BENEFITS SECTION
+================================ */
+
+.benefits-section {
+  padding: 100px 20px;
+  background-color: var(--bg-main);
+  transition: background-color 0.4s ease;
+}
+
+/* --- Title --- */
+.benefits-title {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 800;
+  color: var(--text-main);
+  text-align: center;
+}
+
+/* --- Underline --- */
+.underline {
+  width: 60px;
+  height: 4px;
+  background: var(--accent-blue);
+  margin: 15px auto 60px;
+  border-radius: 10px;
+}
+
+/* --- Grid --- */
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* --- Card --- */
+.benefit-card {
+  background: var(--card-bg);
+  padding: 40px;
+  border-radius: 28px;
+  border: 1px solid var(--border-soft);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+  opacity: 0;
+  animation: fadeInUp 0.6s ease forwards;
+  animation-delay: var(--delay);
+}
+
+.benefit-card:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 20px 40px var(--btn-glow);
+  border-color: var(--accent-blue);
+}
+
+/* --- Icon --- */
+.icon-wrapper {
+  width: 65px;
+  height: 65px;
+  background: rgba(59, 130, 246, 0.1);
+  color: var(--accent-blue);
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  margin-bottom: 25px;
+  transition: all 0.3s ease;
+}
+
+.benefit-card:hover .icon-wrapper {
+  transform: scale(1.1) rotate(10deg);
+  background: var(--accent-blue);
+  color: #ffffff;
+}
+
+/* --- Text --- */
+.benefit-info h3 {
+  color: var(--text-main);
+  margin-bottom: 10px;
+}
+
+.benefit-info p {
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+/* ================================
+   ANIMATION
+================================ */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* ================================
+   ANIMATION
+================================ */
+
+/* ================================
+   TRAINEE ADVANTAGES - FIXED PREMIUM
+================================ */
+
+.trainee-advantages {
+  padding: 100px 0;
+  background-color: var(--bg-main);
+  transition: background-color 0.4s ease, color 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* تأكيد الدارك مود */
+body.dark-mode .trainee-advantages {
+  background-color: var(--bg-main);
+}
+
+/* ================= HEADER ================= */
+
+.advantages-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.advantages-header .title {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 800;
+  color: var(--text-main);
+  letter-spacing: -0.5px;
+}
+
+.advantages-header .highlight {
+  color: var(--accent-blue);
+}
+
+.header-line {
+  width: 60px;
+  height: 4px;
+  background: var(--accent-blue);
+  margin: 15px auto 0;
+  border-radius: 10px;
+}
+
+/* ================= GRID ================= */
+
+.advantages-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 22px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ================= CARD ================= */
+
+.advantage-item {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 26px;
+  border-radius: 22px;
+
+  background: var(--card-bg);
+  border: 1px solid var(--grid-color);
+
+  transition: all 0.35s ease;
+  cursor: pointer;
+  position: relative;
+
+  /* animation ثابتة بدل ما تكون random */
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.6s ease forwards;
+}
+
+/* أنيميشن نظيف */
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ================= HOVER ================= */
+
+.advantage-item:hover {
+  transform: translateY(-6px);
+  border-color: var(--accent-blue);
+  box-shadow: 0 12px 30px rgba(59, 130, 246, 0.15);
+  background: rgba(59, 130, 246, 0.05);
+}
+
+/* ================= ICON ================= */
+
+.advantage-icon {
+  font-size: 28px;
+  color: var(--accent-blue);
+  transition: transform 0.35s ease;
+  flex-shrink: 0;
+}
+
+.advantage-item:hover .advantage-icon {
+  transform: scale(1.1) rotate(6deg);
+}
+
+/* ================= TEXT ================= */
+
+.advantage-text p {
+  font-size: 1.05rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+  margin: 0;
+
+  transition: color 0.3s ease;
+}
+
+.advantage-item:hover .advantage-text p {
+  color: var(--text-main); /* بدل الأزرق عشان تبقى أريح للعين */
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 768px) {
+  .advantages-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .advantage-item {
+    padding: 20px;
+  }
+}
+.vertical-line {
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+.roadmap-card,
+.benefit-card,
+.advantage-item {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+.advantage-icon {
+  font-size: 28px;
+  color: var(--accent-blue);
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
+}
+
+/* Hover: دوران كامل + سكيل خفيف */
+.advantage-item:hover .advantage-icon {
+  transform: rotate(360deg) scale(1.15);
+}
+.advantage-item:hover .advantage-icon {
+  transform: rotate(360deg) scale(1.1);
+  transition: transform 0.8s ease;
+}
+.benefit-card {
+  background: var(--card-bg);
+  padding: 40px;
+  border-radius: 28px;
+
+  /* BORDER واضح ومش خفيف زيادة */
+  border: 1.5px solid rgba(59, 130, 246, 0.35);
+
+  transition: all 0.3s ease;
+
+  opacity: 0;
+  animation: fadeInUp 0.6s ease forwards;
+  animation-delay: var(--delay);
+}
+
+/* ===== PREMIUM HOVER ===== */
+.benefit-card:hover {
+  transform: translateY(-10px);
+  border-color: rgba(59, 130, 246, 0.6);
+  box-shadow: 0 15px 35px rgba(59, 130, 246, 0.15);
+}
+
+/* Glow border effect (modern SaaS style) */
+.benefit-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 28px;
+  padding: 1px;
+
+  background: linear-gradient(
+    135deg,
+    transparent,
+    rgba(59, 130, 246, 0.4),
+    transparent
+  );
+
+  opacity: 0;
+  transition: opacity 0.4s ease;
+
+  -webkit-mask: 
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+}
+
+.benefit-card:hover::before {
+  opacity: 1;
+}
+body:not(.light-mode) .benefit-card {
+  border: 1.5px solid rgba(59, 130, 246, 0.25);
+}

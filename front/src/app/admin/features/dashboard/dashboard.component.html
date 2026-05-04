@@ -1,0 +1,55 @@
+<div class="page">
+      <header class="page-header">
+        <div>
+          <h1 class="page-title">Dashboard</h1>
+          <p class="page-sub"> Admin </p>
+        </div>
+        <button class="refresh-btn" (click)="load()" [disabled]="loading">
+          {{ loading ? '⟳ Loading...' : '⟳ Refresh' }}
+        </button>
+      </header>
+
+      <!-- STATS GRID -->
+      <div class="stats-grid" *ngIf="stats">
+        <div class="stat-card" *ngFor="let card of statCards" [style.--accent]="card.color">
+          <div class="stat-icon material-symbols-rounded">{{ card.icon }}</div>
+          <div class="stat-body">
+            <span class="stat-value">{{ card.value | number }}</span>
+            <span class="stat-label">{{ card.label }}</span>
+          </div>
+          <a class="stat-link" [routerLink]="['/admin', card.route]">View →</a>
+        </div>
+      </div>
+
+      <!-- PENDING ALERTS -->
+      <section class="section" *ngIf="stats">
+        <h2 class="section-title">
+          <span class="material-symbols-rounded" style="color:#f59e0b; vertical-align: middle;">warning</span>
+          Pending Review
+        </h2>
+        <div class="alerts-grid">
+          <div class="alert-card" *ngFor="let a of alertCards" [class.has-items]="a.count > 0">
+            <span class="alert-icon material-symbols-rounded">{{ a.icon }}</span>
+            <div class="alert-body">
+              <span class="alert-label">{{ a.label }}</span>
+              <span class="alert-count" [class.urgent]="a.count > 0">{{ a.count }} pending</span>
+            </div>
+            <a [routerLink]="['/admin', a.route]" class="alert-action" *ngIf="a.count > 0">
+              Review →
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- LOADING -->
+      <div class="loading-state" *ngIf="loading">
+        <div class="spinner"></div>
+        <p>Loading dashboard...</p>
+      </div>
+
+      <!-- ERROR -->
+      <div class="error-state" *ngIf="error">
+        <p>⚠️ {{ error }}</p>
+        <button (click)="load()">Retry</button>
+      </div>
+    </div>

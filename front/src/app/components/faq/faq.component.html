@@ -1,0 +1,32 @@
+<section class="faq-section" [class.light-mode]="!(isDarkMode$ | async)">
+  <div class="container">
+    
+    <div class="section-header">
+      <h2 class="title">Frequently Asked <span class="highlight">Questions</span></h2>
+      <p class="subtitle">Providing diverse courses to establish our students in various security fields.</p>
+    </div>
+
+    <div class="faq-grid" #faqGrid> 
+      <div class="faq-card" 
+           *ngFor="let faq of faqs; let i = index" 
+           [class.active]="activeIndex === i" 
+           [style.--i]="i + 1"
+           (click)="toggleFaq(i)">
+        
+        <div class="faq-header">
+          <span class="question-text">{{faq.question}}</span>
+          <div class="toggle-icon">
+            <i class="fas" [ngClass]="activeIndex === i ? 'fa-minus' : 'fa-plus'"></i>
+          </div>
+        </div>
+
+        <div class="faq-body">
+          <div class="answer-wrapper">
+            <p>{{faq.answer}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,1131 @@
+/* الألوان الأساسية */
+:root {
+  --accent-blue: #3B82F6;
+  --bg-main: #030303;
+  --text-main: #ffffff;
+  --text-dim: #94a3b8;
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --grid-color: rgba(255, 255, 255, 0.08);
+}
+
+body.light-mode {
+  --bg-main: #ffffff;
+  --text-main: #0f172a;
+  --text-dim: #475569;
+  --card-bg: #ffffff;
+  --grid-color: rgba(0, 0, 0, 0.1);
+}
+
+.page-container {
+  background: var(--bg-main);
+  min-height: 100vh;
+  padding: 60px 20px;
+}
+
+/* ✅ الفلترة */
+.filter-bar {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 50px;
+}
+
+.filter-btn {
+  padding: 10px 24px;
+  border-radius: 50px;
+  background: var(--card-bg);
+  color: var(--text-dim);
+  border: 1px solid var(--grid-color);
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.filter-btn.active {
+  background: var(--accent-blue);
+  color: white;
+  border-color: var(--accent-blue);
+}
+
+/* ✅ الـ Grid تلاتات */
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.course-card {
+  background: var(--card-bg);
+  border: 1px solid var(--grid-color);
+  border-radius: 24px;
+  padding: 12px;
+  transition: 0.3s ease;
+}
+
+.course-card:hover { transform: translateY(-10px); border-color: var(--accent-blue); }
+
+.img-container { border-radius: 18px; overflow: hidden; margin-bottom: 15px; height: 200px; }
+.img-container img { width: 100%; height: 100%; object-fit: cover; }
+
+.course-title { font-size: 1.2rem; font-weight: 800; margin-bottom: 20px; color: var(--text-main); }
+
+.bottom-row { display: flex; justify-content: space-between; align-items: center; }
+.price { font-size: 1.4rem; font-weight: 900; color: var(--text-main); }
+
+/* ✅ الزرار المودرن (أبيض وبورد أسود في اللايت) */
+.btn-modern {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 10px 8px 20px;
+  border-radius: 50px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+body.light-mode .btn-modern {
+  background: #fff;
+  color: #000;
+  border: 1px solid #000; /* البورد الأسود اللي طلبته */
+}
+
+body:not(.light-mode) .btn-modern {
+  background: #000;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.icon-wrapper {
+  width: 34px; height: 34px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--accent-blue); color: #fff;
+}
+/* الألوان الأساسية ودعم اللايت/الدارك */
+.page-wrapper.dark-theme { --bg: #000; --text: #fff; --card: #000; --border: rgba(255, 255, 255, 0.1); --muted: #888; }
+.page-wrapper.light-theme { --bg: #f8fafc; --text: #000; --card: #fff; --border: #e2e8f0; --muted: #64748b; }
+
+.page-wrapper { background: var(--bg); color: var(--text); min-height: 100vh; padding: 80px 0; transition: 0.3s; }
+
+/* الـ Grid والمسافات الجانبية (3 جنب بعض) */
+.container { width: 90%; max-width: 1400px; margin: 0 auto; }
+.courses-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; }
+
+/* الكارد النظيف الـ Pill (Clean - No Hover on Card) */
+.premium-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px; /* حواف دائرية أنيقة */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.3s;
+}
+
+/* بنغير لون البوردر في الهوفر العام عشان نحدد الكارد */
+.premium-card:hover { border-color: #3B82F6; }
+
+/* قسم الصورة (الهوفر والمسافات هنا) */
+.card-media { padding: 15px; overflow: hidden; } /* المسافة بين الصورة وبورد الكارد */
+.img-wrapper { width: 100%; height: 200px; border-radius: 18px; overflow: hidden; }
+.img-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
+
+/* الـ Hover على الصورة بس (تكبير بسيط) */
+.premium-card:hover .img-wrapper img { transform: scale(1.06); }
+
+/* التقسيمة والخطوط الرمادي جوا */
+.section-border { border-bottom: 1px solid var(--border); }
+
+.card-meta { display: flex; justify-content: space-between; padding: 12px 20px; font-size: 12px; color: var(--muted); }
+.card-meta i { color: #3B82F6; margin-right: 5px; }
+
+.card-body { padding: 18px 20px; flex-grow: 1; }
+.course-title { font-size: 1.3rem; font-weight: 800; color: var(--text); line-height: 1.4; margin: 0; }
+
+.card-pricing { padding: 12px 20px; }
+.price-tag { font-size: 1.5rem; font-weight: 800; color: var(--text); }
+.price-tag small { font-size: 0.8rem; color: var(--muted); }
+
+/* قسم الزرار (الأبيض في أسود) */
+.card-action { padding: 20px; }
+.btn-path-modern {
+  width: 100%; height: 50px; display: flex; align-items: center; justify-content: space-between;
+  padding: 0 6px 0 25px; background: #fff; color: #000;
+  border: 1.5px solid #000; border-radius: 50px; font-weight: 700; cursor: pointer;
+}
+.circle-icon {
+  width: 38px; height: 38px; background: #000; color: #fff;
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  transition: 0.3s;
+}
+.btn-path-modern:hover { background: #000; color: #fff; border-color: #fff; }
+.btn-path-modern:hover .circle-icon { background: #3B82F6; transform: rotate(-45deg); }
+/* تنسيقات أساسية للزر */
+.view-path-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px; /* المسافة بين النص والسهم */
+  
+  /* الأبعاد والمسافات الداخلية */
+  width: 100%; /* ليأخذ عرض الحاوية بالكامل */
+  max-width: 300px; /* أقصى عرض للزر */
+  padding: 12px 24px;
+  margin: 20px auto; /* للتوسط */
+  
+  /* الألوان والحدود */
+  background-color: #ffffff; /* لون الخلفية بيضاء */
+  color: #000000; /* لون النص أسود */
+  border: 1px solid #e0e0e0; /* حد رمادي فاتح */
+  border-radius: 50px; /* حواف دائرية بالكامل */
+  
+  /* الخطوط */
+  font-family: sans-serif; /* أو أي خط تفضله */
+  font-size: 16px;
+  font-weight: 500;
+  
+  /* تأثيرات الإشارة */
+  cursor: pointer;
+  transition: all 0.3s ease; /* تنعيم الحركة */
+  outline: none; /* إزالة إطار التركيز الافتراضي */
+}
+
+/* تنسيق أيقونة السهم داخل الدائرة */
+.arrow-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  background-color: #000000; /* خلفية السهم سوداء */
+  color: #ffffff; /* لون السهم أبيض */
+  border-radius: 50%; /* دائرية */
+  font-size: 18px;
+  transition: background-color 0.3s ease;
+}
+
+/* --- تأثيرات عند مرور الماوس (Hover Effects) --- */
+
+.view-path-btn:hover {
+  background-color: #f5f5f5; /* تغيير طفيف في لون الخلفية */
+  border-color: #cccccc; /* تغميق الحد قليلاً */
+}
+
+.view-path-btn:hover .arrow-icon {
+  background-color: #333333; /* تفتيح لون خلفية السهم قليلاً */
+}
+/* --- المسافة بين الصورة والبوردر --- */
+.card-media {
+  padding: 16px; /* دي المسافة اللي بتخلي الصورة "جوه" وليها برواز */
+}
+
+.img-wrapper {
+  width: 100%;
+  height: 200px;
+  border-radius: 15px; /* حواف الصورة نفسها دائرية */
+  overflow: hidden;
+}
+
+.img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* هوفر على الصورة بس زي ما طلبت */
+.premium-card:hover .img-wrapper img {
+  transform: scale(1.08);
+}
+
+/* --- الزرار زي الأول (بدون سهم) --- */
+.btn-clean-modern {
+  width: 100%;
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  text-align: center;
+}
+
+/* شكل الزرار في الـ Dark Mode */
+body:not(.light-mode) .btn-clean-modern {
+  background: #ffffff;
+  color: #000000;
+}
+
+body:not(.light-mode) .btn-clean-modern:hover {
+  background: var(--accent-blue);
+  color: #ffffff;
+}
+
+/* شكل الزرار في الـ Light Mode (البورد الأسود) */
+body.light-mode .btn-clean-modern {
+  background: #ffffff;
+  color: #0f172a;
+  border: 1.5px solid #000000; /* البورد الأسود اللي طلبته */
+}
+
+body.light-mode .btn-clean-modern:hover {
+  background: var(--accent-blue); /* ✔ بدل الأسود */
+  color: #ffffff;
+  border-color: var(--accent-blue); /* optional */
+}
+/* --- زرار الـ Dark/Light العائم --- */
+.theme-toggle-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  background: var(--accent-blue, #3B82F6);
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.theme-toggle-btn:hover { transform: scale(1.1); }
+
+/* --- الألوان المتغيرة --- */
+.dark-theme { 
+  --bg: #030303; --text: #fff; --card: #000; --border: rgba(255,255,255,0.1); --btn-bg: #fff; --btn-text: #000; 
+}
+.light-theme { 
+  --bg: #ffffff; --text: #0f172a; --card: #fff; --border: rgba(0,0,0,0.1); --btn-bg: #fff; --btn-text: #000; 
+}
+
+.page-wrapper { background: var(--bg); color: var(--text); transition: 0.3s; padding: 40px 0; }
+
+/* --- الـ Grid --- */
+.courses-grid { 
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; 
+}
+
+/* --- تصميم الكارد والمسافات --- */
+.premium-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: 0.3s;
+}
+
+.card-media { 
+  padding: 15px; /* المسافة اللي طلبتها بين الصورة والبوردر */
+}
+
+.img-wrapper { 
+  border-radius: 15px; overflow: hidden; height: 200px; 
+}
+
+.img-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+.premium-card:hover img { transform: scale(1.08); }
+
+.section-border { border-bottom: 1px solid var(--border); }
+.card-meta { display: flex; justify-content: space-between; padding: 12px 15px; font-size: 12px; color: #888; }
+.card-body { padding: 15px; }
+.course-title { font-size: 1.1rem; font-weight: 700; margin: 0; }
+.card-pricing { padding: 12px 15px; }
+
+/* --- الزرار (View Details) --- */
+.card-action { padding: 15px; }
+.btn-clean-modern {
+  width: 100%;
+  padding: 12px;
+  border-radius: 50px;
+  font-weight: 700;
+  cursor: pointer;
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  border: 1.5px solid #000; /* بورد أسود دايماً في اللايت */
+  transition: 0.3s;
+}
+
+.light-theme .btn-clean-modern:hover { background: #000; color: #fff; }
+.dark-theme .btn-clean-modern:hover { background: #3B82F6; color: #fff; border-color: #3B82F6; }
+/* --- أزرار الفلترة المودرن --- */
+.filter-bar {
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.filter-scroll-wrapper {
+  display: flex;
+  gap: 12px;
+  background: var(--card-bg, rgba(255,255,255,0.05));
+  padding: 8px;
+  border-radius: 50px;
+  border: 1px solid var(--border-color, rgba(255,255,255,0.1));
+}
+
+.tab-btn-modern {
+  padding: 10px 22px;
+  border-radius: 50px;
+  border: none;
+  background: transparent;
+  color: #888;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tab-btn-modern.active {
+  background: #ffffff;
+  color: #000000;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+/* في حالة اللايت مود، بنعكس ألوان الفلتر النشط */
+.light-theme .tab-btn-modern.active {
+  background: #000000;
+  color: #ffffff;
+}
+
+/* --- زرار الـ Theme Control --- */
+.theme-control {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px 5% 0;
+}
+
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  border-radius: 50px;
+  border: 1.5px solid var(--text-color);
+  background: transparent;
+  color: var(--text-color);
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.theme-toggle:hover {
+  background: var(--text-color);
+  color: var(--bg-color);
+}
+
+/* --- متغيرات الألوان --- */
+.dark-theme {
+  --bg-color: #030303;
+  --text-color: #ffffff;
+  --border-color: rgba(255,255,255,0.1);
+  --card-bg: #000000;
+}
+
+.light-theme {
+  --bg-color: #ffffff;
+  --text-color: #0f172a;
+  --border-color: rgba(0,0,0,0.1);
+  --card-bg: #f8fafc;
+}
+
+.page-wrapper {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  min-height: 100vh;
+  transition: background 0.4s ease;
+}
+
+/* بورد أسود للزرار في اللايت مود زي ما طلبت */
+.light-theme .btn-clean-modern {
+  border: 1.5px solid #000000 !important;
+}
+/* --- متغيرات اللون الأزرق --- */
+:root {
+  --blue-primary: #3B82F6;
+  --blue-glow: rgba(59, 130, 246, 0.5);
+}
+
+/* --- الفلاتر (الأزرق) --- */
+.filter-scroll-wrapper {
+  display: flex;
+  gap: 10px;
+  background: var(--card-bg);
+  padding: 8px;
+  border-radius: 50px;
+  border: 1px solid var(--border-color);
+}
+
+.tab-btn-blue {
+  padding: 10px 24px;
+  border-radius: 50px;
+  border: none;
+  background: transparent;
+  color: var(--text-color);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0.7;
+}
+
+/* الحالة النشطة بالأزرق في الدارك واللايت */
+.tab-btn-blue.active {
+  background: var(--blue-primary);
+  color: #ffffff !important; /* الكتابة دايماً بيضاء في النشط */
+  opacity: 1;
+  box-shadow: 0 4px 15px var(--blue-glow);
+}
+
+/* --- زرار الـ Theme (الأزرق) --- */
+.theme-toggle.blue-accent {
+  border: 2px solid var(--blue-primary);
+  color: var(--blue-primary);
+  background: transparent;
+  padding: 10px 20px;
+  border-radius: 50px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.theme-toggle.blue-accent:hover {
+  background: var(--blue-primary);
+  color: #fff;
+  box-shadow: 0 0 20px var(--blue-glow);
+}
+
+/* --- الألوان للثيمات --- */
+.dark-theme {
+  --bg-color: #030303;
+  --text-color: #ffffff;
+  --border-color: rgba(255,255,255,0.1);
+  --card-bg: #000000;
+}
+
+.light-theme {
+  --bg-color: #ffffff;
+  --text-color: #0f172a;
+  --border-color: rgba(0,0,0,0.1);
+  --card-bg: #f8fafc;
+}
+
+.page-wrapper {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  min-height: 100vh;
+  transition: 0.4s ease;
+}
+/* --- الأزرق الموحد --- */
+:root {
+  --blue-primary: #3B82F6; /* أزرق براند مودرن */
+  --blue-glow: rgba(59, 130, 246, 0.4);
+}
+
+/* --- ستايل الفلاتر (Tabs) --- */
+.filter-scroll-wrapper {
+  display: flex;
+  gap: 10px;
+  background: var(--card-bg, rgba(255,255,255,0.05));
+  padding: 8px;
+  border-radius: 50px;
+  border: 1px solid var(--border-color);
+}
+
+.tab-btn-blue {
+  padding: 10px 24px;
+  border-radius: 50px;
+  border: none;
+  background: transparent;
+  color: var(--text-color);
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+/* لما نضغط على الفلتر يبقى أزرق */
+.tab-btn-blue.active {
+  background: #3B82F6 !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 15px var(--blue-glow);
+}
+
+/* --- زرار الثيم الأزرق --- */
+.theme-toggle.blue-accent {
+  border: 2px solid #3B82F6;
+  color: #3B82F6;
+  background: transparent;
+  padding: 8px 18px;
+  border-radius: 50px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.theme-toggle.blue-accent:hover {
+  background: #3B82F6;
+  color: #fff;
+}
+
+/* --- الثيمات --- */
+.dark-theme {
+  --bg-color: #030303;
+  --text-color: #ffffff;
+  --border-color: rgba(255,255,255,0.1);
+  --card-bg: #000000;
+}
+
+.light-theme {
+  --bg-color: #ffffff;
+  --text-color: #0f172a;
+  --border-color: rgba(0,0,0,0.1);
+  --card-bg: #f8fafc;
+}
+
+.page-wrapper {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  min-height: 100vh;
+}
+/* src/app/pages/all-courses/all-courses.component.css */
+
+/* ✅ الألوان الأساسية للثيمات */
+body.dark-mode {
+  --bg-color: #030303;
+  --text-color: #ffffff;
+  --text-dim: #94a3b8;
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --border-color: rgba(255, 255, 255, 0.08);
+}
+
+body.light-mode {
+  --bg-color: #ffffff;
+  --text-color: #0f172a;
+  --text-dim: #475569;
+  --card-bg: #ffffff;
+  --border-color: rgba(0, 0, 0, 0.1);
+}
+
+/* ✅ تنسيق شريط الفلترة (Tabs) */
+.filter-bar {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 50px;
+  padding: 40px 0;
+  background-color: var(--bg-color);
+}
+
+.tab-btn {
+  padding: 10px 24px;
+  border-radius: 50px;
+  background: var(--card-bg);
+  color: var(--text-dim);
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ✅ ده الأزرق الصريح اللي طلبته في الـ Active */
+.tab-btn.active {
+  background-color: #3B82F6 !important; /* أزرق براند صريح */
+  color: #ffffff !important;           /* نص أبيض واضح */
+  border-color: #3B82F6;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4); /* توهج أزرق ناعم */
+}
+
+/* زرار الـ Theme */
+.theme-toggle-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px 5%;
+  background-color: var(--bg-color);
+}
+
+.theme-btn {
+  padding: 10px 20px;
+  border-radius: 50px;
+  border: 1.5px solid var(--border-color);
+  background: var(--card-bg);
+  color: var(--text-color);
+  cursor: pointer;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.theme-btn:hover { border-color: #3B82F6; color: #3B82F6; }
+
+/* ✅ تنسيق الكروت الثلاثية */
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.course-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  padding: 12px;
+  transition: 0.3s;
+}
+
+.img-container { height: 200px; border-radius: 18px; overflow: hidden; margin-bottom: 15px; }
+.img-container img { width: 100%; height: 100%; object-fit: cover; }
+.course-title { font-size: 1.2rem; font-weight: 800; margin-bottom: 20px; color: var(--text-main); }
+.bottom-row { display: flex; justify-content: space-between; align-items: center; }
+.price { font-size: 1.4rem; font-weight: 900; color: var(--text-main); }
+
+/* زرار View Path البسيط */
+.btn-view-path {
+  padding: 10px 24px;
+  border-radius: 50px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+}
+body.dark-mode .btn-view-path { background: #fff; color: #000; }
+body.light-mode .btn-view-path { background: #000; color: #fff; }
+/* ✅ إجباري: الباك جروند الأزرق للزرار النشط في أي مود */
+.tab-btn.active {
+    background-color: #3B82F6 !important; /* الأزرق اللي طلبته */
+    color: #ffffff !important;           /* النص أبيض */
+    border-color: #3B82F6 !important;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+/* ستايل الأزرار العادي في الليت مود */
+body.light-mode .tab-btn {
+    background-color: #f1f5f9;
+    color: #475569;
+    border: 1px solid #e2e8f0;
+}
+
+/* ستايل الأزرار العادي في الدارك مود */
+body.dark-mode .tab-btn {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #94a3b8;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ✅ تنسيق الصورة عشان تملا الكارت */
+.img-container {
+    height: 200px;
+    background-color: #1e293b; /* لون احتياطي */
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* عشان الصورة متتمطش */
+}
+.btn-clean-modern {
+  width: 100%;
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1.5px solid transparent;
+}
+
+/* Light */
+body.light-mode .btn-clean-modern {
+  background: #fff;
+  color: #0f172a;
+  border-color: #000;
+}
+
+/* Dark */
+body:not(.light-mode) .btn-clean-modern {
+  background: #fff;
+  color: #000;
+}
+
+/* Hover (موحد) */
+.btn-clean-modern:hover {
+  background: var(--accent-blue);
+  color: #fff;
+  border-color: var(--accent-blue);
+}
+/* الزرار الأزرق النشط دايماً */
+.tab-btn-blue.active {
+  background-color: #3B82F6 !important;
+  color: white !important;
+  box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
+}
+
+/* ستايل القلب المكسور والـ Empty State */
+.empty-state-container {
+  display: flex;
+  justify-content: center;
+  padding: 100px 0;
+  text-align: center;
+}
+
+.broken-heart-icon {
+  font-size: 80px;
+  color: #ef4444;
+  animation: heartbeat 1.5s infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* ستايل الصورة */
+.img-wrapper {
+  height: 200px;
+  overflow: hidden;
+  border-radius: 15px;
+}
+.course-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* الحاوية الرئيسية للتوسيط */
+.empty-state-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh; /* بياخد مساحة كويسة من الشاشة */
+  width: 100%;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.empty-state-card {
+  max-width: 450px;
+  width: 100%;
+}
+
+/* أيقونة القلب المكسور */
+.icon-box {
+  position: relative;
+  margin-bottom: 25px;
+}
+
+.broken-heart-anim {
+  font-size: 90px;
+  color: #ff4d4d;
+  animation: heartPulse 2s ease-in-out infinite;
+  filter: drop-shadow(0 0 15px rgba(255, 77, 77, 0.4));
+}
+
+/* أنيميشن النبض */
+@keyframes heartPulse {
+  0% { transform: scale(1); }
+  15% { transform: scale(1.15); }
+  30% { transform: scale(1); }
+  45% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+/* النصوص */
+.status-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--text-color); /* بيسمع في الدارك واللايت */
+  margin-bottom: 10px;
+}
+
+.status-text {
+  font-size: 1.1rem;
+  color: #94a3b8;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+/* بادج "تحت الإنشاء" */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(59, 130, 246, 0.1);
+  color: #3B82F6;
+  padding: 10px 25px;
+  border-radius: 100px;
+  font-weight: 600;
+  margin-bottom: 35px;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+/* الزرار الأزرق */
+.btn-primary-blue {
+  background: #3B82F6;
+  color: white;
+  border: none;
+  padding: 15px 35px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+}
+
+.btn-primary-blue:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(59, 130, 246, 0.5);
+}
+/* FIX نهائي للهوفر */
+body.light-mode .btn-clean-modern:hover,
+.light-theme .btn-clean-modern:hover {
+  background: var(--accent-blue) !important;
+  color: #fff !important;
+  border-color: var(--accent-blue) !important;
+}
+/* ============================= */
+/* ✅ FIX: تحسين اللايت مود بالكامل */
+/* ============================= */
+
+/* 1️⃣ تخفيف البوردر في اللايت */
+.light-theme {
+  --border-color: rgba(0, 0, 0, 0.06);
+  --text-dim: #94a3b8;
+}
+
+/* 2️⃣ تحسين شكل الفواصل (Fade بدل خط حاد) */
+.section-border {
+  border-bottom: 1px solid;
+  border-image: linear-gradient(to right, transparent, var(--border-color), transparent) 1;
+}
+
+/* 3️⃣ استخدام Shadow بدل Borders في اللايت */
+.premium-card {
+  border: none;
+}
+
+.light-theme .premium-card {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+}
+
+.dark-theme .premium-card {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* 4️⃣ توحيد Hover الزرار (أزرق دايماً) */
+body.light-mode .btn-clean-modern:hover,
+.light-theme .btn-clean-modern:hover {
+  background: var(--accent-blue) !important;
+  color: #fff !important;
+  border-color: var(--accent-blue) !important;
+}
+
+/* 5️⃣ تحسين النصوص الثانوية */
+.card-meta {
+  color: var(--text-dim);
+}
+
+/* 6️⃣ تحسين الفلتر في اللايت */
+.light-theme .filter-scroll-wrapper {
+  background: #f8fafc;
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+/* 7️⃣ تحسين الـ active tab */
+.tab-btn-blue.active {
+  background: var(--accent-blue) !important;
+  color: #fff !important;
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.35);
+}
+
+/* 8️⃣ تحسين الصورة (نعومة أكتر) */
+.img-wrapper img {
+  transition: transform 0.5s ease, filter 0.5s ease;
+}
+
+.premium-card:hover .img-wrapper img {
+  transform: scale(1.06);
+  filter: brightness(1.05);
+}
+
+/* ============================= */
+/* 💎 BONUS: لمسة احترافية */
+/* ============================= */
+
+.light-theme .premium-card:hover {
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+}
+
+.dark-theme .premium-card:hover {
+  border-color: var(--accent-blue);
+}
+/* --- ستايل الهيدر (Hero Section) --- */
+.main-header {
+  padding: 80px 20px 40px; /* مساحة واسعة زي الصورة */
+  text-align: center;
+}
+
+.hero-title {
+  font-size: 4.5rem; /* حجم كبير وجريء */
+  font-weight: 850;
+  color: var(--text-color);
+  line-height: 1.05;
+  letter-spacing: -3px; /* تقريب الحروف زي الستايل المودرن */
+  margin-bottom: 30px;
+  transition: color 0.3s ease;
+}
+
+.hero-subtitle {
+  font-size: 1.3rem;
+  color: #64748b; /* لون رمادي هادي زي الصورة */
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+/* تعديل بسيط للأزرق في الهيدر لو حابب تلمس كلمة معينة (اختياري) */
+.hero-title span {
+  color: #3B82F6;
+}
+
+/* --- Responsive (للموبايل) --- */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.8rem;
+    letter-spacing: -1px;
+  }
+  .desktop-only {
+    display: none;
+  }
+}
+
+/* تأكد إن الـ container متسنتر */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+/* تظبيط المسافة فوق الهيدر */
+.main-header {
+  padding-top: 120px; /* زودنا المسافة فوق عشان الهيدر يتنفس */
+  padding-bottom: 60px;
+  text-align: center;
+}
+
+/* ستايل العنوان الرئيسي */
+.hero-title {
+  font-size: 4.5rem;
+  font-weight: 850;
+  color: var(--text-color);
+  line-height: 1.1;
+  letter-spacing: -2px;
+  margin-bottom: 25px;
+}
+
+/* ✅ تلوين السطر التاني بالأزرق */
+.blue-text {
+  color: #3B82F6 !important; /* نفس درجة الأزرق اللي في الفلاتر */
+  display: inline-block;
+  margin-top: 10px;
+}
+
+/* ستايل النص الفرعي */
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: #64748b; /* رمادي رايق */
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* للموبايل عشان الشكل ميبوظش */
+@media (max-width: 768px) {
+  .main-header {
+    padding-top: 80px;
+  }
+  .hero-title {
+    font-size: 2.5rem;
+    letter-spacing: -1px;
+  }
+}
+/* ✅ تقليل المسافة العلوية للهيدر */
+.main-header {
+  padding-top: 60px; /* قللنا المسافة عشان متبقاش فاضية زيادة */
+  padding-bottom: 40px;
+  text-align: center;
+}
+
+/* ✅ حل مشكلة تفاصيل السكاشن (الحدود والظلال) */
+/* بنخلي كل الانتقالات ناعمة جداً */
+* {
+  transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, color 0.3s ease;
+}
+
+/* توحيد لون الحدود في الدارك مود عشان متبقاش فاقعة */
+.dark-theme .section-border, 
+.dark-theme .premium-card {
+  border-color: rgba(255, 255, 255, 0.05) !important;
+  box-shadow: none !important; /* بنشيل أي ظل قديم بيبان وقت النقلة */
+}
+
+/* توحيد لون الحدود في اللايت مود */
+.light-theme .section-border, 
+.light-theme .premium-card {
+  border-color: rgba(0, 0, 0, 0.05) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+
+/* تعديل الـ Hero Title */
+.hero-title {
+  font-size: 3.8rem; /* صغرنا الحجم شوية عشان التناسق */
+  font-weight: 850;
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+/* 1. السيطرة على الـ Transition */
+/* هنخلي الألوان بس هي اللي تتغير بنعومة، لكن الحدود والظلال تتغير فوراً عشان متبانش */
+.page-wrapper, .main-header, .premium-card, .filter-bar {
+  transition: background-color 0.4s ease, color 0.3s ease;
+}
+
+/* 2. تنظيف الحدود (Borders) */
+/* في الدارك مود بنخلي الحدود شفافة جداً عشان متعملش "خيال" أبيض */
+.dark-theme .premium-card, 
+.dark-theme .section-border,
+.dark-theme .filter-bar {
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  box-shadow: none !important;
+}
+
+/* في اللايت مود بنخليها شفافة برضه بس بالأسود */
+.light-theme .premium-card, 
+.light-theme .section-border,
+.light-theme .filter-bar {
+  border: 1px solid rgba(0, 0, 0, 0.05) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+}
+
+/* 3. تظبيط الهيدر والمسافة */
+.main-header {
+  padding: 40px 0 20px; /* مسافة معقولة جداً ومش كبيرة */
+  text-align: center;
+}
+
+.hero-title {
+  font-size: 3.5rem;
+  font-weight: 850;
+  letter-spacing: -2px;
+  line-height: 1.1;
+}
+
+/* لون السطر التاني */
+.blue-text {
+  color: #3B82F6 !important;
+}

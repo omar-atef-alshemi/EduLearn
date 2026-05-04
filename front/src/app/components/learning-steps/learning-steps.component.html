@@ -1,0 +1,30 @@
+<section class="learning-steps-supreme" #sectionWrapper>
+  <div class="container">
+    <div class="section-header animate-up">
+      <div class="supreme-badge">Your Journey</div>
+      <h2 class="supreme-title">The Path to <span class="gradient-text">Mastery</span></h2>
+      <p class="supreme-subtitle">A structured, world-class experience designed for your success.</p>
+    </div>
+
+    <div class="journey-wrapper">
+      <div class="journey-line-container">
+        <div class="base-line"></div>
+        <div class="active-line" #scrollLine></div>
+      </div>
+
+      <div class="steps-grid">
+        <div class="step-card" *ngFor="let step of steps; let i = index" [style.--i]="i + 1">
+          <div class="step-icon-wrapper">
+            <div class="icon-blob"></div>
+            <i [class]="step.icon"></i>
+          </div>
+          <div class="step-content">
+            <span class="step-tag">Step 0{{i + 1}}</span>
+            <h3>{{step.title}}</h3>
+            <p>{{step.desc}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

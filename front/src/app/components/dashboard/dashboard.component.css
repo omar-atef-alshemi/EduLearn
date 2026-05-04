@@ -1,0 +1,347 @@
+/* Dashboard Layout */
+.dashboard-layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--bg);
+  transition: all 0.4s ease;
+}
+
+/* Sidebar Styling */
+.side-menu {
+  width: 280px;
+  background-color: var(--bg-sidebar);
+  display: flex;
+  flex-direction: column;
+  padding: 40px 24px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  box-shadow: 10px 0 40px rgba(0,0,0,0.1);
+  z-index: 100;
+  transition: all 0.4s ease;
+}
+
+.logo-area h2 {
+  color: #ffffff;
+  font-family: 'Outfit', sans-serif;
+  font-size: 32px;
+  font-weight: 900;
+  margin-bottom: 50px;
+  letter-spacing: -1.5px;
+  background: linear-gradient(135deg, #fff, rgba(255,255,255,0.6));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.menu-links a {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+  margin-bottom: 12px;
+  border-radius: 18px;
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.menu-links a i {
+  margin-right: 15px;
+  font-size: 20px;
+  width: 25px;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.menu-links a:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateX(5px);
+}
+
+.menu-links a.active {
+  background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+  color: #ffffff;
+  box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+}
+
+.menu-links a.active i {
+  transform: scale(1.1);
+}
+
+.menu-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 20px 0;
+}
+
+.logout-section {
+  margin-top: auto;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.logout-section a {
+  display: flex;
+  align-items: center;
+  color: var(--alert);
+  text-decoration: none;
+  font-weight: 700;
+  padding: 16px 20px;
+  border-radius: 18px;
+  transition: 0.3s;
+}
+
+.logout-section a:hover {
+  background: rgba(255, 95, 71, 0.1);
+  transform: scale(1.02);
+}
+
+/* Main Content Area */
+.main-content {
+  flex: 1;
+  padding: 60px 80px;
+  background: var(--bg);
+  background-image: radial-gradient(at 100% 0%, var(--accent) 0, transparent 30%);
+}
+
+.welcome-section h1 {
+  font-size: 48px;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 900;
+  color: var(--text);
+  letter-spacing: -2px;
+  margin-bottom: 8px;
+}
+
+.welcome-section p {
+  font-size: 18px;
+  color: var(--text-sec);
+  margin-bottom: 48px;
+}
+
+/* Stats Overview */
+.stats-overview {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 30px;
+  margin-bottom: 60px;
+}
+
+.stat-card {
+  background: var(--bg-elevated);
+  padding: 30px;
+  border-radius: 28px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  transition: 0.4s;
+}
+
+.stat-card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary);
+}
+
+.stat-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+
+.stat-icon.blue { background: rgba(59, 130, 246, 0.1); color: var(--primary); }
+.stat-icon.green { background: rgba(5, 210, 70, 0.1); color: var(--success); }
+.stat-icon.orange { background: rgba(238, 154, 11, 0.1); color: var(--warning); }
+.stat-icon.purple { background: rgba(124, 58, 237, 0.1); color: #7c3aed; }
+
+.stat-info h3 {
+  font-size: 32px;
+  font-weight: 900;
+  margin: 0;
+  color: var(--text);
+  font-family: 'Outfit', sans-serif;
+}
+
+.stat-info p {
+  font-size: 14px;
+  margin: 0;
+  color: var(--text-sec);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Courses Grid */
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 40px;
+}
+
+.course-card {
+  background: var(--bg-elevated);
+  border-radius: 32px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.course-card:hover {
+  transform: translateY(-12px);
+  box-shadow: var(--shadow-lg);
+}
+
+.card-banner {
+  position: relative;
+  height: 200px;
+}
+
+.card-banner img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: 0.5s;
+}
+
+.course-card:hover .card-banner img { transform: scale(1.05); }
+
+.status-badge {
+  position: absolute;
+  top: 20px; right: 20px;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(8px);
+  color: white;
+  padding: 6px 14px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.status-badge.done { background: var(--success); }
+
+.card-body { padding: 30px; }
+.card-body h4 {
+  font-size: 22px;
+  margin-bottom: 12px;
+  color: var(--text);
+  font-family: 'Outfit', sans-serif;
+}
+
+.last-lesson { color: var(--text-sec); font-size: 14px; margin-bottom: 24px; opacity: 0.8; }
+
+.progress-info { display: flex; justify-content: space-between; margin-bottom: 10px; font-weight: 700; font-size: 13px; color: var(--text-sec); }
+.bar-bg { height: 10px; background: var(--bg-content); border-radius: 20px; overflow: hidden; }
+.bar-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--primary-hover)); border-radius: 20px; }
+
+.btn-action {
+  width: 100%; padding: 16px; border: none; border-radius: 18px;
+  background: var(--primary); color: white; font-weight: 800; cursor: pointer;
+  margin-top: 24px; transition: 0.3s;
+}
+
+.btn-action:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(59, 130, 246, 0.4);
+}
+
+.btn-finish { background: var(--success); }
+
+/* Certificates */
+.cert-row {
+  background: var(--bg-elevated);
+  padding: 24px;
+  border-radius: 24px;
+  border: 1px solid var(--border);
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: 0.4s;
+}
+
+.cert-row:hover { border-color: var(--primary); transform: translateX(10px); }
+
+.pdf-icon { font-size: 32px; color: var(--alert); }
+.cert-details h5 { color: var(--text); font-size: 18px; margin: 0; font-family: 'Outfit', sans-serif; }
+.cert-date { color: var(--text-sec); font-size: 14px; margin-top: 4px; }
+
+.btn-download {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  padding: 12px 24px;
+  border-radius: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s;
+  color: var(--text);
+}
+
+.btn-download:hover { background: var(--primary); color: white; border-color: var(--primary); }
+
+/* Profile Page */
+.profile-placeholder {
+  background: var(--bg-elevated);
+  padding: 80px;
+  border-radius: 40px;
+  border: 1px solid var(--border);
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+}
+
+.user-avatar { font-size: 120px; color: var(--primary); margin-bottom: 24px; }
+.profile-placeholder h3 { font-size: 36px; font-weight: 900; color: var(--text); font-family: 'Outfit', sans-serif; }
+.profile-placeholder p { color: var(--text-sec); font-size: 18px; margin-bottom: 40px; }
+
+.role-badge {
+  background: var(--accent); color: var(--primary);
+  padding: 8px 24px; border-radius: 30px; font-weight: 800; font-size: 14px;
+}
+
+.profile-info { max-width: 500px; margin: 40px auto 0; }
+.info-row {
+  display: flex; justify-content: space-between; padding: 20px 0;
+  border-bottom: 1px solid var(--border);
+}
+.info-row .label { color: var(--text-sec); font-weight: 600; }
+.info-row .value { color: var(--text); font-weight: 800; }
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .side-menu { width: 80px; padding: 40px 10px; }
+  .logo-area h2, .menu-links span, .logout-section span { display: none; }
+  .main-content { padding: 40px; }
+}
+
+
+.no-certs-msg {
+  padding: 40px;
+  text-align: center;
+  background: var(--bg-content);
+  border-radius: 20px;
+  color: var(--text-sec);
+  border: 2px dashed var(--border);
+}
+
+.cert-date {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 5px 0 0;
+}
+
+.role-badge {
+  background: var(--accent);
+  color: var(--primary);
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 25px;
+}

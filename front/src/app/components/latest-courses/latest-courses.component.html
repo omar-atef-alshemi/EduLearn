@@ -1,0 +1,47 @@
+<section class="latest-courses-supreme">
+  <div class="section-header animate-up">
+    <div class="supreme-badge">Course Discovery</div>
+    <h2 class="supreme-title">Expand Your <span class="gradient-text">Knowledge</span></h2>
+    <p class="supreme-subtitle">Master in-demand skills with our premium course selection.</p>
+  </div>
+
+  <div class="courses-container">
+    <div class="supreme-grid">
+      <div *ngFor="let course of displayCourses; let i = index" 
+           class="supreme-course-card animate-up"
+           [style.animation-delay]="i * 0.1 + 's'">
+        
+        <div class="course-thumbnail">
+          <img [src]="course.thumbnail" alt="Course" onerror="this.src='assets/course-placeholder.png'">
+          <div class="course-badge" *ngIf="course.price === 0">Free</div>
+          <div class="course-badge featured" *ngIf="course.price > 0">Premium</div>
+        </div>
+
+        <div class="course-info">
+          <div class="course-meta">
+            <span class="meta-item"><i class="far fa-clock"></i> 12h</span>
+            <span class="meta-item"><i class="fas fa-star"></i> 4.9</span>
+          </div>
+          
+          <h3 class="course-title">{{ course.title.en }}</h3>
+          
+          <div class="course-footer">
+            <div class="course-price">
+              <span class="current-price" *ngIf="course.price > 0">${{ course.price }}</span>
+              <span class="current-price" *ngIf="course.price === 0">Free</span>
+            </div>
+            <button class="btn-card" [routerLink]="['/course-details', course.id]">
+              Details <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="view-all-wrapper animate-up">
+      <button class="btn btn-supreme-lg" routerLink="/all-courses">
+        Explore All Courses <i class="fas fa-arrow-right"></i>
+      </button>
+    </div>
+  </div>
+</section>

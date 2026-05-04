@@ -1,0 +1,186 @@
+<div class="dashboard-layout">
+  <!-- Side Menu (Unchanged) -->
+  <aside class="side-menu">
+    <div class="logo-area">
+      <h2>EduLearn</h2>
+    </div>
+    
+    <nav class="menu-links">
+      <a routerLink="/" class="home-link"><i class="fas fa-home"></i><span>Home Page</span></a>
+      <div class="menu-divider"></div>
+      <a routerLink="/student/dashboard" routerLinkActive="active"><i class="fas fa-th-large"></i><span>Dashboard</span></a>
+      <a routerLink="/student/my-courses" routerLinkActive="active"><i class="fas fa-book"></i><span>My Courses</span></a>
+      <a routerLink="/student/certificates" routerLinkActive="active"><i class="fas fa-award"></i><span>Certificates</span></a>
+      <a routerLink="/student/profile" routerLinkActive="active"><i class="fas fa-user-circle"></i><span>Profile</span></a>
+    </nav>
+
+    <div class="logout-section">
+      <a (click)="onLogout()" style="cursor: pointer;"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <header class="welcome-section" *ngIf="currentView === 'dashboard'">
+      <h1>Welcome back, {{ userName }}! 👋</h1>
+      <p *ngIf="!loading">You have {{ stats.totalCourses }} courses enrolled. Keep going!</p>
+    </header>
+
+    <header class="welcome-section" *ngIf="currentView === 'certificates'">
+      <h1>My Certificates 🏆</h1>
+      <p *ngIf="!loading">You have earned {{ stats.completedCourses }} certificates. Great job!</p>
+    </header>
+
+    <header class="welcome-section" *ngIf="currentView === 'my-courses'">
+      <h1>My Courses 📚</h1>
+      <p *ngIf="!loading">Manage and continue your learning journey.</p>
+    </header>
+
+    <header class="welcome-section" *ngIf="currentView === 'profile'">
+      <h1>My Profile 👤</h1>
+      <p>Manage your account settings and personal information.</p>
+    </header>
+
+    <!-- Stats Overview (Only on Dashboard) -->
+    <div class="stats-overview" *ngIf="!loading && currentView === 'dashboard'">
+      <div class="stat-card">
+        <div class="stat-icon blue"><i class="fas fa-book-open"></i></div>
+        <div class="stat-info">
+          <h3>{{ stats.totalCourses }}</h3>
+          <p>Total Courses</p>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon green"><i class="fas fa-check-circle"></i></div>
+        <div class="stat-info">
+          <h3>{{ stats.completedCourses }}</h3>
+          <p>Completed</p>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon orange"><i class="fas fa-star"></i></div>
+        <div class="stat-info">
+          <h3>{{ stats.averageScore }}%</h3>
+          <p>Avg Score</p>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon purple"><i class="fas fa-chart-line"></i></div>
+        <div class="stat-info">
+          <h3>{{ stats.overallProgress }}%</h3>
+          <p>Overall Progress</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loading State -->
+    <div class="loading-container" *ngIf="loading">
+      <div class="spinner"></div>
+      <p>Loading your dashboard...</p>
+    </div>
+
+    <!-- Courses Grid (Only on Dashboard and My Courses) -->
+    <section class="content-group" *ngIf="!loading && enrollments.length > 0 && (currentView === 'dashboard' || currentView === 'my-courses')">
+      <div class="group-header">
+        <h3><i class="fas fa-graduation-cap"></i> My Enrolled Courses</h3>
+      </div>
+
+      <div class="courses-grid">
+        <div class="course-card" *ngFor="let item of enrollments">
+          <div class="card-banner">
+            <img [src]="item.thumbnail || 'assets/default-course.png'" alt="Course Image">
+            <span class="status-badge" [class.done]="item.isCompleted">
+              {{ item.isCompleted ? 'Completed' : 'In Progress' }}
+            </span>
+          </div>
+
+          <div class="card-body">
+            <h4>{{ item.title?.en || item.title?.ar || item.title }}</h4>
+            <p class="last-lesson">Next: {{ item.lastLesson }}</p>
+            
+            <div class="progress-area">
+              <div class="progress-info">
+                <span>Completion</span>
+                <span>{{ item.progress }}%</span>
+              </div>
+              <div class="bar-bg">
+                <div class="bar-fill" [style.width.%]="item.progress"></div>
+              </div>
+            </div>
+
+            <button class="btn-action" 
+                    [routerLink]="['/course-viewer', item.courseId]"
+                    [class.btn-finish]="item.isCompleted">
+              <i class="fas" [ngClass]="item.isCompleted ? 'fa-check-double' : 'fa-play'"></i>
+              {{ item.isCompleted ? 'Completed' : 'Continue Learning' }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Empty State -->
+    <div class="empty-state" *ngIf="!loading && enrollments.length === 0 && (currentView === 'dashboard' || currentView === 'my-courses')">
+      <i class="fas fa-book-open"></i>
+      <h3>No Courses Found</h3>
+      <p>You haven't enrolled in any courses yet.</p>
+      <button class="btn-primary" routerLink="/all-courses">Browse Courses</button>
+    </div>
+
+    <!-- Certificates Section (Only on Dashboard and Certificates) -->
+    <section class="content-group certificates-box" *ngIf="!loading && (currentView === 'dashboard' || currentView === 'certificates')">
+      <div class="group-header">
+        <h3><i class="fas fa-medal"></i> My Certificates</h3>
+      </div>
+      
+      <div *ngIf="!hasCertificates()" class="no-certs-msg">
+        <p>No certificates earned yet. Complete a course to receive your certificate!</p>
+      </div>
+
+      <div class="cert-list" *ngIf="hasCertificates()">
+        <ng-container *ngFor="let item of enrollments">
+          <div class="cert-row" *ngIf="item.isCompleted && item.certificate">
+            <div class="cert-meta">
+              <div class="pdf-icon"><i class="fas fa-file-pdf"></i></div>
+              <div class="cert-details">
+                <h5>{{ item.title?.en || item.title?.ar || item.title }} - Certificate</h5>
+                <p class="cert-date">Issued on: {{ item.certificate.issueDate | date:'mediumDate' }}</p>
+              </div>
+            </div>
+            <button class="btn-download" (click)="downloadCertificate(item)"><i class="fas fa-download"></i> Download</button>
+          </div>
+        </ng-container>
+      </div>
+    </section>
+
+    <!-- Profile Section (Linked to Backend) -->
+    <section class="content-group" *ngIf="currentView === 'profile'">
+      <div class="profile-placeholder">
+        <div class="user-avatar">
+          <i class="fas fa-user-circle"></i>
+        </div>
+        <h3>{{ userName }}</h3>
+        <p>{{ userProfile?.email }}</p>
+        <span class="role-badge">{{ userProfile?.role | titlecase }} Account</span>
+        
+        <div class="profile-info">
+          <div class="info-row">
+            <span class="label">First Name:</span>
+            <span class="value">{{ userProfile?.firstName }}</span>
+          </div>
+          <div class="info-row">
+            <span class="label">Last Name:</span>
+            <span class="value">{{ userProfile?.lastName }}</span>
+          </div>
+          <div class="info-row">
+            <span class="label">Total Courses:</span>
+            <span class="value">{{ stats.totalCourses }}</span>
+          </div>
+          <div class="info-row">
+            <span class="label">Completed:</span>
+            <span class="value">{{ stats.completedCourses }}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>

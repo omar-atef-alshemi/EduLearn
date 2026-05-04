@@ -1,0 +1,64 @@
+<div class="home-wrapper mesh-bg">
+  <nav class="supreme-nav animate-up">
+    <div class="nav-container">
+      <div class="nav-left">
+        <div class="logo-supreme" routerLink="/">Edu<span>Learn</span></div>
+        <div class="nav-links hide-mobile">
+          <a routerLink="/all-courses">Courses</a>
+          <a routerLink="/about">About</a>
+          <a routerLink="/faq">FAQ</a>
+        </div>
+      </div>
+      
+      <div class="nav-right">
+        <button class="theme-toggle-btn" (click)="toggleTheme()" [title]="isDarkMode ? 'Light Mode' : 'Dark Mode'">
+          <i class="fas" [ngClass]="isDarkMode ? 'fa-sun' : 'fa-moon'"></i>
+        </button>
+
+        <ng-container *ngIf="!isLoggedIn">
+          <a routerLink="/signin" class="nav-link-simple">Login</a>
+          <button routerLink="/register" class="btn btn-primary">Sign Up</button>
+        </ng-container>
+
+        <ng-container *ngIf="isLoggedIn">
+          <button [routerLink]="dashboardLink" class="btn btn-primary">Dashboard</button>
+          <div class="user-profile-nav" routerLink="/student/profile">
+            <img [src]="userPhoto" alt="Profile" onerror="this.src='assets/default-course.png'">
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </nav>
+
+  <main class="home-content">
+    <app-hero></app-hero>
+    <app-learning-steps></app-learning-steps>
+    <app-academy-sections></app-academy-sections>
+    <app-latest-courses></app-latest-courses>
+    <app-faq></app-faq>
+  </main>
+
+  <footer class="supreme-footer-main">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo-supreme">Edu<span>Learn</span></div>
+          <p>Elevating education through premium digital experiences.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Platform</h4>
+          <a routerLink="/all-courses">Browse Courses</a>
+          <a routerLink="/become-instructor">Teach on EduLearn</a>
+        </div>
+        <div class="footer-links">
+          <h4>Support</h4>
+          <a routerLink="/faq">Help Center</a>
+          <a routerLink="/contact">Contact Us</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 EduLearn Pro. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+</div>

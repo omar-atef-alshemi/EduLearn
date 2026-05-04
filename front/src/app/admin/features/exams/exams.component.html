@@ -1,0 +1,177 @@
+<div class="page-wrapper">
+
+      <!-- HEADER -->
+      <div class="page-header">
+        <div class="header-left">
+          <h1 class="page-title">
+            <span class="material-symbols-rounded" style="vertical-align: middle; font-size: 28px;">quiz</span>
+            All Exams
+          </h1>
+          <span class="badge" *ngIf="!loading">{{ exams.length }} exam{{ exams.length !== 1 ? 's' : '' }}</span>
+        </div>
+        <button class="btn-refresh" (click)="load()" [disabled]="loading">
+          <span [class.spinning]="loading">↻</span> Refresh
+        </button>
+      </div>
+
+      <!-- LOADING -->
+      <div class="loading-state" *ngIf="loading">
+        <div class="spinner"></div>
+        <p>Loading exams…</p>
+      </div>
+
+      <!-- EMPTY -->
+      <div class="empty-state" *ngIf="!loading && exams.length === 0">
+        <div class="empty-icon">📭</div>
+        <h2>No exams found</h2>
+        <p>No exams have been added yet.</p>
+      </div>
+
+      <!-- CARDS -->
+      <div class="cards-grid" *ngIf="!loading && exams.length > 0">
+        <div class="exam-card" *ngFor="let exam of exams">
+
+          <!-- Card Header -->
+          <div class="card-header">
+            <div class="header-badges">
+              <span class="status-pill" [ngClass]="exam.status">
+                {{ statusIcon(exam.status) }} {{ exam.status | titlecase }}
+              </span>
+              <span class="type-pill" [class.final]="exam.isFinal">
+                {{ exam.isFinal ? '🏁 Final' : '📋 Section' }}
+              </span>
+              <span class="published-pill" *ngIf="exam.isPublished">🌐 Published</span>
+            </div>
+            <span class="exam-date">{{ exam.createdAt | date:'MMM d, y' }}</span>
+          </div>
+
+          <!-- Card Body -->
+          <div class="card-body">
+
+            <h2 class="exam-title">{{ exam.title?.en || 'Untitled' }}</h2>
+            <p class="exam-title-ar">{{ exam.title?.ar }}</p>
+
+            <!-- Course Details -->
+            <div class="section-block course-block" *ngIf="exam.courseId">
+              <div class="section-label">📚 Course Details</div>
+              <div class="detail-grid">
+                <div class="detail-item">
+                  <span class="detail-key">Title (EN)</span>
+                  <span class="detail-val">{{ exam.courseId?.title?.en || '—' }}</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-key">Title (AR)</span>
+                  <span class="detail-val ar">{{ exam.courseId?.title?.ar || '—' }}</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-key">Category</span>
+                  <span class="detail-val">{{ exam.courseId?.category || '—' }}</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-key">Price</span>
+                  <span class="detail-val">
+                    {{ exam.courseId?.price != null ? (exam.courseId.price + ' EGP') : '—' }}
+                  </span>
+                </div>
+                
+                <div class="detail-item full-width" *ngIf="exam.courseId?.description?.en">
+                  <span class="detail-key">Description</span>
+                  <span class="detail-val">{{ exam.courseId.description.en }}</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Exam Settings -->
+            <div class="section-block">
+              <div class="section-label">⚙️ Exam Settings</div>
+              <div class="stats-row">
+                <div class="stat">
+                  <span class="stat-icon">⏱️</span>
+                  <span class="stat-val">{{ exam.duration }}</span>
+                  <span class="stat-lbl">Minutes</span>
+                </div>
+                <div class="stat">
+                  <span class="stat-icon">❓</span>
+                  <span class="stat-val">{{ exam.questions?.length || 0 }}</span>
+                  <span class="stat-lbl">Questions</span>
+                </div>
+                <div class="stat">
+                  <span class="stat-icon">🎯</span>
+                  <span class="stat-val">{{ exam.minScore }}%</span>
+                  <span class="stat-lbl">Pass Score</span>
+                </div>
+                <div class="stat">
+                  <span class="stat-icon">🔄</span>
+                  <span class="stat-val">{{ exam.maxAttempts }}</span>
+                  <span class="stat-lbl">Attempts</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Questions -->
+            <div class="section-block" *ngIf="exam.questions?.length > 0">
+              <div class="section-label">
+                ❓ Questions
+                <span class="count-badge">{{ exam.questions.length }}</span>
+              </div>
+              <div class="questions-list">
+                <div class="question-item" *ngFor="let q of exam.questions; let i = index">
+                  <div class="q-header">
+                    <span class="q-num">Q{{ i + 1 }}</span>
+                    <span class="q-grade">{{ q.grade }} pt{{ q.grade !== 1 ? 's' : '' }}</span>
+                  </div>
+                  <p class="q-text-en">{{ q.questionText?.en }}</p>
+                  <p class="q-text-ar" *ngIf="q.questionText?.ar">{{ q.questionText.ar }}</p>
+                  <div class="options-grid" *ngIf="q.options?.en?.length">
+                    <span
+                      class="option"
+                      *ngFor="let opt of q.options.en; let oi = index">
+                      {{ optionLabel(oi) }} {{ opt }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <!-- END card-body -->
+
+          <!-- ACTION BUTTONS — تظهر بس لو الامتحان pending -->
+          <div class="card-actions" *ngIf="exam.status === 'pending'">
+            <button
+              class="btn-approve"
+              (click)="approve(exam)"
+              [disabled]="processingId === exam._id">
+              <span *ngIf="processingId !== exam._id">✅ Approve</span>
+              <span *ngIf="processingId === exam._id">Processing…</span>
+            </button>
+            <button
+              class="btn-reject"
+              (click)="reject(exam)"
+              [disabled]="processingId === exam._id">
+              ❌ Reject
+            </button>
+          </div>
+
+          <!-- لو مش pending بيظهر الحالة الحالية -->
+          <div class="card-actions-done" *ngIf="exam.status !== 'pending'">
+            <span class="done-label approved" *ngIf="exam.status === 'approved'">
+              ✅ Already Approved
+            </span>
+            <span class="done-label rejected" *ngIf="exam.status === 'rejected'">
+              ❌ Already Rejected
+            </span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- TOAST -->
+      <div class="toast"
+           [class.show]="toast.show"
+           [class.success]="toast.type === 'success'"
+           [class.error]="toast.type === 'error'">
+        {{ toast.message }}
+      </div>
+
+    </div>

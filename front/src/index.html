@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>LmsProject</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+</head>
+</head>
+<body>
+  <app-root></app-root>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({
+    // 1. زود الوقت لـ 1500ms عشان الحركة تبان انسيابية جداً (Slow & Smooth)
+    duration: 1500, 
+    
+    // 2. نوع الحركة: 'ease-out-cubic' بيبدأ الحركة بوضوح وينهيها بنعومة فائقة
+    easing: 'ease-out-cubic', 
+    
+    // 3. التكرار: false عشان يفضل يشتغل وأنت طالع ونازل
+    once: false, 
+    
+    // 4. المرآة: true ضروري لطلبك (الأنيميشن وأنت طالع)
+    mirror: true, 
+    
+    // 5. المسافة: خليها 50 عشان الأنيميشن يبدأ بمجرد ما طرف الكارد يدخل الشاشة
+    offset: 50,
+    
+    // 6. Anchor Placement: بيخلي الأنيميشن يتحدد مكانه بدقة بالنسبة للشاشة
+
+    // 👈 السطر ده بيخلي الأنيميشن يتفعل بناءً على وضع العنصر بالنسبة للشاشة
+  anchorPlacement: 'top-center',
+    
+    easing: 'ease-out-cubic'
+  });
+</script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-dim": "#d7dae1",
+                        "secondary-fixed": "#cbe6ff",
+                        "primary-fixed": "#cbe6ff",
+                        "on-secondary-fixed-variant": "#244a65",
+                        "tertiary-fixed-dim": "#ffb86e",
+                        "on-tertiary-container": "#442500",
+                        "surface-container": "#ebeef5",
+                        "inverse-on-surface": "#eef1f8",
+                        "tertiary": "#8a5100",
+                        "outline-variant": "#bec8d2",
+                        "inverse-surface": "#2d3136",
+                        "on-primary-fixed": "#001e30",
+                        "secondary-container": "#b9deff",
+                        "primary-container": "#019ce4",
+                        "on-error-container": "#93000a",
+                        "on-secondary-container": "#3e637f",
+                        "on-surface": "#181c21",
+                        "surface-container-high": "#e5e8ef",
+                        "background": "#f7f9ff",
+                        "secondary": "#3e627e",
+                        "on-tertiary-fixed": "#2c1600",
+                        "outline": "#6f7882",
+                        "secondary-fixed-dim": "#a6cbeb",
+                        "surface-container-highest": "#dfe3e9",
+                        "tertiary-fixed": "#ffdcbd",
+                        "surface-container-low": "#f0f4fa",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-tint": "#019ce4",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "tertiary-container": "#d57f00",
+                        "error": "#ba1a1a",
+                        "surface-bright": "#f7f9ff",
+                        "on-background": "#181c21",
+                        "surface-variant": "#dfe3e9",
+                        "surface": "#f7f9ff",
+                        "primary": "#019ce4",
+                        "on-tertiary-fixed-variant": "#693c00",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed-dim": "#8ecdff",
+                        "on-primary-fixed-variant": "#004b71",
+                        "on-tertiary": "#ffffff",
+                        "inverse-primary": "#8ecdff",
+                        "on-secondary-fixed": "#001e30",
+                        "on-surface-variant": "#3f4851",
+                        "on-primary-container": "#002f49",
+                        "error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.5rem",
+                        "sm": "0.25rem",
+                        "md": "0.75rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "xs": "4px",
+                        "sm": "12px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "xl": "40px",
+                        "gutter": "16px",
+                        "margin": "24px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Lexend", "sans-serif"],
+                        "body": ["Lexend", "sans-serif"],
+                        "label": ["Lexend", "sans-serif"]
+                    }
+                },
+            },
+        }
+    </script>
+</body>
+</html>

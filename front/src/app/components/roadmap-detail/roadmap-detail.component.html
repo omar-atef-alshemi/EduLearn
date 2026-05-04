@@ -1,0 +1,135 @@
+
+
+<button class="theme-toggle-btn" (click)="toggleTheme()">
+  <i [class]="(isDarkMode$ | async) ? 'fas fa-sun' : 'fas fa-moon'"></i>
+  <span>{{ (isDarkMode$ | async) ? 'Light Mode' : 'Dark Mode' }}</span>
+</button>
+<div *ngIf="activeData">
+  
+ <header class="path-header" [class.dark-mode]="(isDarkMode$ | async)">
+  <div class="container">
+    <span class="badge">LEARNING PATH</span>
+    <h1 class="path-title">{{ activeData.pathDetails.title }}</h1>
+    <p class="path-desc">{{ activeData.pathDetails.description }}</p>
+  </div>
+</header>
+
+  <section class="stats-section">
+     </section>
+  
+</div>
+
+<div *ngIf="activeData">
+  
+  <section class="stats-section">
+    <div class="stats-grid">
+      <div class="stat-card" *ngFor="let detail of activeData.roadmapDetails">
+        <div class="icon-container">
+          <i [class]="detail.icon"></i>
+        </div>
+        <div class="text-content">
+          <span class="label">{{ detail.title }}</span>
+          <h3 class="value">{{ detail.value }}</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="audience-section">
+    <h2 class="section-title">Who is this track for?</h2>
+    <div class="audience-grid">
+      <div class="audience-card" *ngFor="let target of activeData.audienceList">
+        <div class="audience-content">
+          <p>{{ target.text }}</p>
+        </div>
+        <div class="audience-icon-wrapper">
+          <div class="audience-circle">
+            <i [class]="target.icon"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="curriculum-timeline">
+    <div class="timeline-container">
+      <div class="vertical-line"></div>
+
+      <div class="timeline-row" *ngFor="let course of activeData.contentList; let i = index; let odd = odd" [class.reverse-row]="odd">
+        
+        <div class="side-content card-side">
+          <div class="roadmap-card">
+            <div class="card-head">
+              <i class="fas fa-microchip blue-icon"></i>
+              <h3>{{ course.titleEn }}</h3>
+            </div>
+            <ul class="points-list">
+              <li *ngFor="let point of course.points">{{ point }}</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="center-marker">
+          <div class="step-ring">
+            <span class="step-num">{{ i + 1 }}</span>
+          </div>
+        </div>
+
+        <div class="side-content duration-side">
+          <div class="time-box">
+            <span class="time-label">ESTIMATION</span>
+            <span class="time-value">{{ course.duration }} Hours</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</div>
+<section class="benefits-section" [class.dark-mode]="(isDarkMode$ | async)">
+  <div class="container">
+    <div class="benefits-header">
+      <h2 class="benefits-title">{{ activeData.benefits.title }}</h2>
+      <div class="underline"></div>
+    </div>
+
+    <div class="benefits-grid">
+      <div class="benefit-card" *ngFor="let item of activeData.benefits.items; let i = index" 
+           [style.--delay]="i * 0.2 + 's'">
+        <div class="icon-wrapper">
+          <i [class]="item.icon"></i>
+        </div>
+        <div class="benefit-info">
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.desc }}</p>
+        </div>
+        <div class="card-glow"></div>
+      </div>
+    </div>
+  </div>
+<section class="trainee-advantages" [class.dark-mode]="(isDarkMode$ | async)">
+  <div class="container">
+    
+    <div class="advantages-header">
+      <h2 class="title">Trainee Core <span class="highlight">Advantages</span></h2>
+      <div class="header-line"></div>
+    </div>
+
+    <div class="advantages-grid">
+      <div class="advantage-item" *ngFor="let adv of traineeAdvantages; let i = index" 
+           [style.animation-delay]="i * 0.1 + 's'">
+        
+        <div class="advantage-icon">
+          <i class="fas fa-check-circle"></i> 
+        </div>
+
+        <div class="advantage-text">
+          <p>{{ adv.text }}</p>
+        </div>
+
+        <div class="hover-glow"></div>
+      </div>
+    </div>
+
+  </div>
+</section>

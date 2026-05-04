@@ -1,0 +1,22 @@
+.page { padding: 32px; max-width: 1200px; }
+    .page-header { margin-bottom: 16px; }
+    .page-title { font-size: 26px; font-weight: 700; color: #172B4C; margin: 0 0 4px; }
+    .page-sub { color: #64748b; margin: 0; font-size: 14px; }
+    .info-banner { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 10px; padding: 12px 16px; font-size: 14px; color: #1d4ed8; margin-bottom: 24px; }
+    .reviews-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+    .review-card { background: #fff; border-radius: 16px; padding: 20px; box-shadow: 0 2px 12px rgba(23,43,76,0.08); border: 2px solid transparent; transition: all 0.2s; }
+    .review-card.featured { border-color: #fbbf24; background: #fffbeb; }
+    .review-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+    .reviewer { display: flex; align-items: center; gap: 10px; }
+    .avatar { width: 36px; height: 36px; border-radius: 50%; background: #3B82F6; color: #fff; font-weight: 700; font-size: 13px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .reviewer-name { display: block; font-weight: 600; font-size: 14px; color: #172B4C; }
+    .review-date { display: block; font-size: 11px; color: #64748b; }
+    .stars { font-size: 16px; }
+    .review-comment { font-size: 14px; color: #374151; line-height: 1.5; margin: 0 0 16px; }
+    .review-footer { display: flex; justify-content: space-between; align-items: center; }
+    .featured-badge { font-size: 12px; font-weight: 700; color: #d97706; }
+    .toggle-btn { padding: 6px 14px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; border: 2px solid #3B82F6; color: #3B82F6; background: transparent; transition: all 0.2s; }
+    .toggle-btn:hover { background: #3B82F6; color: #fff; }
+    .toggle-btn.un-feature { border-color: #64748b; color: #64748b; }
+    .toggle-btn.un-feature:hover { background: #64748b; color: #fff; }
+    .loading-state, .empty-state { padding: 60px; text-align: center; color: #64748b; }

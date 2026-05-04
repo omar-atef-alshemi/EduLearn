@@ -1,0 +1,93 @@
+<div [class.dark-theme]="isDarkMode" [class.light-theme]="!isDarkMode" class="page-wrapper">
+     <div class="theme-control">
+    <button class="theme-toggle blue-accent" (click)="toggleTheme()">
+      <i [class]="isDarkMode ? 'fas fa-sun' : 'fas fa-moon'"></i>
+      <span>{{ isDarkMode ? 'Light Mode' : 'Dark Mode' }}</span>
+    </button>
+  </div>
+
+  <header class="main-header" data-aos="fade-down">
+  <div class="container">
+    <h1 class="hero-title">
+      Explore all courses <br> 
+      <span class="blue-text">& learning paths.</span>
+    </h1>
+    <p class="hero-subtitle">
+      Discover industry-relevant, career-focused courses <br class="desktop-only">
+      carefully crafted to help you gain practical skills.
+    </p>
+  </div>
+</header>
+ 
+  <div class="container">
+    <div class="filter-bar" data-aos="fade-down">
+      <div class="filter-scroll-wrapper">
+        <button *ngFor="let cat of categories" 
+                (click)="filterData(cat)"
+                [class.active]="selectedCategory === cat" 
+                class="tab-btn-blue">
+          {{ cat }}
+        </button>
+      </div>
+    </div>
+
+    <div class="courses-grid" *ngIf="displayCourses.length > 0">
+      <div *ngFor="let course of displayCourses; let i = index" 
+           class="premium-card" 
+           data-aos="fade-up" 
+           [attr.data-aos-delay]="(i % 3) * 100">
+        
+        <div class="card-media">
+          <div class="img-wrapper">
+            <img [src]="course.thumbnail || 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'" 
+                 alt="course cover" class="course-img">
+          </div>
+        </div>
+
+        <div class="card-meta section-border">
+          <span><i class="far fa-clock"></i> {{ course.duration }}</span>
+          <span><i class="far fa-play-circle"></i> {{ course.lessons }} Lessons</span>
+        </div>
+
+        <div class="card-body section-border">
+          <h3 class="course-title">{{ course.title }}</h3>
+        </div>
+
+        <div class="card-pricing section-border">
+          <span class="price-tag">${{ course.price }} <small>USD</small></span>
+        </div>
+
+        <div class="card-action">
+        <a class="btn" [routerLink]="['/course-details', course.id]">
+  عرض التفاصيل
+</a>
+        </div>
+      </div>
+    </div>
+
+ <div *ngIf="displayCourses.length === 0" class="empty-state-wrapper" data-aos="zoom-in">
+  <div class="empty-state-card">
+    <div class="icon-box">
+      <i class="fas fa-heart-broken broken-heart-anim"></i>
+      <div class="pulse-ring"></div>
+    </div>
+    
+    <h2 class="status-title">No Courses Found</h2>
+    <p class="status-text">
+      We're currently crafting some amazing content for this category. 
+      Stay tuned, something big is coming soon!
+    </p>
+    
+    <div class="status-badge">
+      <i class="fas fa-hammer"></i>
+      <span>Under Construction</span>
+    </div>
+
+    <button class="btn-primary-blue" (click)="filterData('All')">
+      Explore All Courses
+    </button>
+  </div>
+</div>
+
+  </div>
+</div>

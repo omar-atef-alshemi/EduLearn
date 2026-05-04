@@ -1,0 +1,119 @@
+<div class="page-container" *ngIf="!loading && course">
+  <!-- Hero Section -->
+  <section class="course-hero">
+    <div class="hero-bg" [style.backgroundImage]="'url(' + (course.thumbnail || 'assets/default-course.png') + ')'"></div>
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+      <div class="badge">{{ course.category }}</div>
+      <h1>{{ course.title?.en || course.title }}</h1>
+      <p class="description">{{ course.description?.en || course.description }}</p>
+      
+      <div class="course-meta">
+        <span><i class="fas fa-user-tie"></i> {{ course.instructorId?.name || 'Top Instructor' }}</span>
+        <span><i class="fas fa-clock"></i> {{ course.duration || '12 Hours' }}</span>
+        <span><i class="fas fa-star"></i> 4.8 (120 Reviews)</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="container main-layout">
+    <!-- Left Column: Details -->
+    <div class="details-column">
+      <div class="tabs">
+        <button [class.active]="activeTab === 'overview'" (click)="activeTab = 'overview'">Overview</button>
+        <button [class.active]="activeTab === 'curriculum'" (click)="activeTab = 'curriculum'">Curriculum</button>
+        <button [class.active]="activeTab === 'instructor'" (click)="activeTab = 'instructor'">Instructor</button>
+      </div>
+
+      <div class="tab-content">
+        <!-- Overview -->
+        <div *ngIf="activeTab === 'overview'" class="animate-fade">
+          <h3>What you'll learn</h3>
+          <ul class="learning-list">
+            <li><i class="fas fa-check"></i> Comprehensive understanding of {{ course.category }}</li>
+            <li><i class="fas fa-check"></i> Master practical industry-standard techniques</li>
+            <li><i class="fas fa-check"></i> Build real-world projects from scratch</li>
+            <li><i class="fas fa-check"></i> Gain a certificate of completion</li>
+          </ul>
+        </div>
+
+        <!-- Curriculum -->
+        <div *ngIf="activeTab === 'curriculum'" class="animate-fade">
+          <h3>Course Content</h3>
+          <div class="syllabus">
+            <div class="section-item" *ngFor="let section of course.sections; let i = index">
+              <div class="section-header">
+                <span>Unit {{ i + 1 }}: {{ section.title?.en || section.title }}</span>
+                <span class="lesson-count">{{ section.lessons?.length || 0 }} lessons</span>
+              </div>
+              <ul class="lesson-list">
+                <li *ngFor="let lesson of section.lessons">
+                  <i class="far fa-play-circle"></i> {{ lesson.title?.en || lesson.title }}
+                  <span class="preview" *ngIf="lesson.type === 'video'">Preview</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Instructor -->
+        <div *ngIf="activeTab === 'instructor'" class="animate-fade">
+          <div class="instructor-card">
+            <img src="assets/default-course.png" alt="Instructor">
+            <div class="instr-info">
+              <h4>{{ course.instructorId?.name || 'Professional Instructor' }}</h4>
+              <p class="title">Senior {{ course.category }} Expert</p>
+              <p class="bio">{{ course.instructorId?.bio || 'Passionate educator with years of industry experience in ' + course.category + '.' }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Sidebar -->
+    <div class="sidebar-column">
+      <div class="pricing-card sticky">
+        <div class="preview-video">
+          <img [src]="course.thumbnail || 'assets/default-course.png'" alt="Preview">
+          <div class="play-icon"><i class="fas fa-play"></i></div>
+        </div>
+        
+        <div class="price-box">
+          <span class="current-price">${{ course.price }}</span>
+          <span class="old-price" *ngIf="course.price">${{ (course.price * 1.5).toFixed(0) }}</span>
+        </div>
+
+       <button class="btn-enroll"
+        *ngIf="!isEnrolled"
+        [disabled]="loadingPayment"
+        (click)="enrollNow()">
+  {{ course.price === 0 ? 'Enroll Now' : 'Buy Now' }}
+</button>
+        
+        <button class="btn-go-course" *ngIf="isEnrolled" [routerLink]="['/course-viewer', course._id || course.id]">
+          Continue to Course
+        </button>
+
+        <ul class="features">
+          <li><i class="fas fa-infinity"></i> Lifetime Access</li>
+          <li><i class="fas fa-mobile-alt"></i> Access on mobile and TV</li>
+          <li><i class="fas fa-certificate"></i> Certificate of Completion</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Loading State -->
+<div class="loading-state" *ngIf="loading">
+  <div class="loader"></div>
+  <p>Loading course details...</p>
+</div>
+
+<!-- Error/Empty State -->
+<div class="empty-state" *ngIf="!loading && !course">
+  <i class="fas fa-exclamation-circle"></i>
+  <h2>Course Not Found</h2>
+  <p>The course you are looking for might have been moved or deleted.</p>
+  <button class="btn-primary" routerLink="/all-courses">Back to Courses</button>
+</div>

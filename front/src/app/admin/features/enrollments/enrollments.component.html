@@ -1,0 +1,86 @@
+<div class="page">
+      <header class="page-header">
+        <div>
+          <h1 class="page-title">
+            <span class="material-symbols-rounded" style="vertical-align: middle; font-size: 28px;">assignment</span>
+            Enrollments
+          </h1>
+          <p class="page-sub">Manage student-course enrollments — {{ total }} total</p>
+        </div>
+        <button class="btn-primary" (click)="showForm = !showForm">
+          {{ showForm ? '✕ Cancel' : '+ Enroll Student' }}
+        </button>
+      </header>
+
+      <!-- CREATE FORM -->
+      <div class="card" *ngIf="showForm" style="padding:24px;margin-bottom:20px">
+        <h2 style="font-size:18px;font-weight:700;color:#172B4C;margin:0 0 16px">Manual Enrollment</h2>
+        <form [formGroup]="enrollForm" (ngSubmit)="createEnrollment()" class="form-row">
+          <div class="form-group">
+            <label>Student ID</label>
+            <input formControlName="studentId" placeholder="MongoDB ObjectId" />
+          </div>
+          <div class="form-group">
+            <label>Course ID</label>
+            <input formControlName="courseId" placeholder="MongoDB ObjectId" />
+          </div>
+          <button type="submit" class="btn-primary" [disabled]="enrollForm.invalid || creating">
+            {{ creating ? 'Enrolling...' : 'Enroll' }}
+          </button>
+        </form>
+        <div class="alert" [class.alert-error]="formMsg.type==='error'" [class.alert-success]="formMsg.type==='success'" *ngIf="formMsg.text">
+          {{ formMsg.text }}
+        </div>
+      </div>
+
+      <!-- FILTERS -->
+      <div class="filter-bar">
+        <select [(ngModel)]="statusFilter" (change)="page=1; load()">
+          <option value="">All Status</option>
+          <option value="pending">Pending</option>
+          <option value="active">Active</option>
+          <option value="completed">Completed</option>
+        </select>
+      </div>
+
+      <!-- TABLE -->
+      <div class="card table-card">
+        <div class="loading-row" *ngIf="loading">⟳ Loading...</div>
+        <table class="data-table" *ngIf="!loading && enrollments.length > 0">
+          <thead>
+            <tr>
+              <th>Student</th>
+              <th>Course</th>
+              <th>Progress</th>
+              <th>Status</th>
+              <th>Enrolled</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let e of enrollments">
+              <td>{{ e.studentId?.firstName }} {{ e.studentId?.lastName }}</td>
+              <td class="muted">{{ e.courseId?.title?.ar }}</td>
+              <td>
+                <div class="progress-bar">
+                  <div class="progress-fill" [style.width.%]="e.progressPercentage"></div>
+                </div>
+                <span class="progress-pct">{{ e.progressPercentage }}%</span>
+              </td>
+              <td><span class="badge badge-{{ e.status }}">{{ e.status }}</span></td>
+              <td class="muted">{{ e.createdAt | date:'mediumDate' }}</td>
+              <td>
+                <button class="btn-sm btn-danger" (click)="delete(e)">Remove</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="empty-state" *ngIf="!loading && enrollments.length === 0">No enrollments found.</div>
+      </div>
+
+      <div class="pagination" *ngIf="pages > 1">
+        <button [disabled]="page <= 1" (click)="changePage(page - 1)">‹ Prev</button>
+        <span>Page {{ page }} of {{ pages }}</span>
+        <button [disabled]="page >= pages" (click)="changePage(page + 1)">Next ›</button>
+      </div>
+    </div>
